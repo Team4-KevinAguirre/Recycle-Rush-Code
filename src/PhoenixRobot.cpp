@@ -28,70 +28,14 @@ void PhoenixRobot::handle(){
 		//printf("Handling...\n");
 		m_Controller->handle(this);
 
-		m_LeftDriveA->Set(m_leftDriveValue);
-		m_RightDriveA->Set(m_rightDriveValue);
+//		m_LeftDriveA->Set(m_leftDriveValue);
+//		m_RightDriveA->Set(m_rightDriveValue);
 
 }
 
 void PhoenixRobot::DriveSpeedTurn(float speed, float turn, bool quickTurn)
 {
-	float temp_vel = speed;
-	float sensitivity = 0;
-	//float unscaled_turn = 0;
-
-	if (temp_vel < 0)
-		temp_vel = -temp_vel;
-
-	//printf("Velocity: %f, stick: %f\r\n", velocity, temp_vel);
-
-	if(speed < 0.10 && speed > -0.10)
-		speed = 0;
-	if ((turn < 0.10 && turn > -0.10) || (speed == 0 && !quickTurn))
-		turn = 0;
-
-	//unscaled_turn = turn;
-
-	if(quickTurn)
-		sensitivity = 1;
-	else
-		sensitivity = 0.4;
-
-	turn *= sensitivity;
-	turn = -turn;
-
-	float left_power = PhoenixLib::LimitMix(speed + turn);
-	float right_power = PhoenixLib::LimitMix(speed - turn);
-
-	DriveLeftRight(left_power, right_power);
-}
-
-void PhoenixRobot::DriveLeftRight(float leftDriveValue, float rightDriveValue){
-
-	if(leftDriveValue > -1.0 && leftDriveValue < 1.0)
-		if((rightDriveValue > -1.0 && rightDriveValue < 1.0)){
-			m_leftDriveValue = leftDriveValue;
-			m_rightDriveValue = rightDriveValue;
-		}
-
-}
-
-void PhoenixRobot::SetLeftMotors(float val){
-
-	if(val < -1.0)
-		val = -1.0;
-	else if(val > 1.0)
-		val = 1.0;
-
-	m_LeftDriveA->Set(-val);
-}
-void PhoenixRobot::SetRightMotors(float val){
-
-	if(val < -1.0)
-		val = -1.0;
-	else if(val > 1.0)
-		val = 1.0;
-
-	m_RightDriveA->Set(val);
+	m_Drive->DriveSpeedTurn(speed, turn, quickTurn);
 }
 
 void PhoenixRobot::SetController(GenericController* controller){

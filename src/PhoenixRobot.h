@@ -28,8 +28,7 @@ private:
 
 	Constants* m_Constants;
 	//Drive Motors
-	Talon* m_RightDriveA;
-	Talon* m_LeftDriveA;
+
 	DriveBase* m_Drive;
 
 	float m_leftDriveValue;
@@ -67,8 +66,6 @@ private:
 //	double m_PreviousGyroError;
 //	double m_PreviousDriveError;
 //
-	void SetLeftMotors(float val);
-	void SetRightMotors(float val);
 public:
 	PhoenixRobot();
 //	void Reset();
@@ -92,7 +89,6 @@ public:
 //	void WinchHoldVoltage(double setpoint);
 //	void WinchDespring();
 	void DriveSpeedTurn(float speed, float turn, bool quickTurn);
-	void DriveLeftRight(float leftDriveValue, float rightDriveValue);
 //	void QuickTurn(float turn);
 //	double KinectLeftRight();
 //	double GetFrontIR();

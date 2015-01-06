@@ -16,7 +16,7 @@ public:
 
 	DriveBase(); //This function is called the constructor
 
-	~DriveBase();//Destructor is the correct terminology.  This has to do with memory management.  We always need to release dynamically allocated memory.
+	//~DriveBase();//Destructor is the correct terminology.  This has to do with memory management.  We always need to release dynamically allocated memory.
 
 	void DriveSpeedTurn(float speed, float turn, bool quickTurn);
 
