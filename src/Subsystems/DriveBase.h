@@ -4,6 +4,7 @@
 #define HI
 
 #include "WPILib.h"
+#include "../PhoenixLib/PhoenixLib.h"
 #include "../Config/Constants.h"
 
 
@@ -27,6 +28,12 @@ public:
 
 	double GetDriveDistance();
 
+	double GetLeftEncoderDistance();
+
+	double GetRightEncoderDistance();
+
+	void ResetEncoders();
+
 
 
 
@@ -35,8 +42,12 @@ private:
 	//Why put in private?
 
 	Constants* m_Constants;
+
 	Talon* m_LeftDriveMotor;
 	Talon* m_RightDriveMotor;
+
+	Encoder* m_LeftDriveEncoder;
+	Encoder* m_RightDriveEncoder;
 
 	float m_leftDriveValue;
 	float m_rightDriveValue;

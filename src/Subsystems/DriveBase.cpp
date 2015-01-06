@@ -6,9 +6,11 @@ DriveBase::DriveBase(){
 
 	m_Constants = Constants::GetInstance();
 
-	m_RightDriveMotor = new Talon(m_Constants->PWM_RIGHT_DRIVE_A);
-	m_LeftDriveMotor = new Talon(m_Constants->PWM_LEFT_DRIVE_A);
+	m_RightDriveMotor = new Talon((int)m_Constants->PWM_RIGHT_DRIVE_A);
+	m_LeftDriveMotor = new Talon((int)m_Constants->PWM_LEFT_DRIVE_A);
 
+	m_LeftDriveEncoder = new Encoder((int)m_Constants->ENCODER_LEFT_DRIVE_A, (int)m_Constants->ENCODER_LEFT_DRIVE_B);
+	m_RightDriveEncoder = new Encoder((int)m_Constants->ENCODER_RIGHT_DRIVE_A, (int)m_Constants->ENCODER_RIGHT_DRIVE_B);
 	m_leftDriveValue = 0.0;
 	m_rightDriveValue = 0.0;
 }
@@ -23,7 +25,6 @@ void DriveBase::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 	float temp_vel = speed;
 		float sensitivity = 0;
 		//float unscaled_turn = 0;
-
 		if (temp_vel < 0)
 			temp_vel = -temp_vel;
 
@@ -48,8 +49,6 @@ void DriveBase::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 		float right_power = PhoenixLib::LimitMix(speed - turn);
 
 		DriveLeftRight(left_power, right_power);
-
-
 }
 
 void DriveBase::SetLeftMotors(float val){
@@ -81,10 +80,43 @@ void DriveBase::DriveLeftRight(float leftDriveValue, float rightDriveValue){
 }
 
 
+double DriveBase::GetLeftEncoderDistance(){
+	  // Number of clicks read by encoder / number of clicks per rotation * gear ratio from encoder to wheel *
+	  // wheel circumference
+	//TODO: Make sure this is correct
+	double clicksPerRotation = 256.0;
+	double wheelSize = 6.0;
 
-void DriveBase::DriveWithHeading(double heading, double speed);
+	return (-m_LeftDriveEncoder->Get()/ clicksPerRotation * wheelSize * m_Constants->PI);
 
-bool DriveBase::DriveDistanceWithHeading(double heading, double distance);
 
-double DriveBase::GetDriveDistance();
+}
+
+double DriveBase::GetRightEncoderDistance(){
+	  // Number of clicks read by encoder / number of clicks per rotation * gear ratio from encoder to wheel *
+	  // wheel circumference
+	//TODO: Make sure this is correct
+	double clicksPerRotation = 256.0;
+	double wheelSize = 6.0;
+
+	return (-m_RightDriveEncoder->Get()/ clicksPerRotation * wheelSize * m_Constants->PI);
+
+}
+
+void DriveBase::ResetEncoders() {
+	m_LeftDriveEncoder->Reset();
+	m_RightDriveEncoder->Reset();
+}
+
+void DriveBase::DriveWithHeading(double heading, double speed){
+
+}
+
+bool DriveBase::DriveDistanceWithHeading(double heading, double distance){
+
+}
+
+double DriveBase::GetDriveDistance(){
+
+}
 
