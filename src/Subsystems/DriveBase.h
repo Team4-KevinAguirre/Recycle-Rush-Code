@@ -14,7 +14,7 @@ class DriveBase
 
 public:
 
-	DriveBase(); //This function is called the constructor
+	DriveBase(Talon* leftDriveMotorA, Talon* rightDriveMotorA, Encoder* LeftDriveEncoder, Encoder* RightDriveEncoder); //This function is called the constructor
 
 	//~DriveBase();//Destructor is the correct terminology.  This has to do with memory management.  We always need to release dynamically allocated memory.
 

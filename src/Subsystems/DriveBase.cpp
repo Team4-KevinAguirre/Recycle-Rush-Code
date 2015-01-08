@@ -2,15 +2,15 @@
 //This is where we define everything.
 #include "DriveBase.h"
 
-DriveBase::DriveBase(){
+DriveBase::DriveBase(Talon* LeftDriveMotorA, Talon* RightDriveMotorA, Encoder* LeftDriveEncoder, Encoder* RightDriveEncoder){
 
 	m_Constants = Constants::GetInstance();
 
-	m_RightDriveMotor = new Talon((int)m_Constants->PWM_RIGHT_DRIVE_A);
-	m_LeftDriveMotor = new Talon((int)m_Constants->PWM_LEFT_DRIVE_A);
+	m_LeftDriveMotor = LeftDriveMotorA;
+	m_RightDriveMotor = RightDriveMotorA;
 
-	m_LeftDriveEncoder = new Encoder((int)m_Constants->ENCODER_LEFT_DRIVE_A, (int)m_Constants->ENCODER_LEFT_DRIVE_B);
-	m_RightDriveEncoder = new Encoder((int)m_Constants->ENCODER_RIGHT_DRIVE_A, (int)m_Constants->ENCODER_RIGHT_DRIVE_B);
+	m_LeftDriveEncoder = LeftDriveEncoder;
+	m_RightDriveEncoder = RightDriveEncoder;
 
 	m_leftDriveValue = 0.0;
 	m_rightDriveValue = 0.0;

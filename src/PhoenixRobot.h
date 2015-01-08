@@ -33,7 +33,17 @@ private:
 
 	float m_leftDriveValue;
 	float m_rightDriveValue;
-//
+
+	//Motors
+	Talon* m_LeftDriveMotorA;
+	Talon* m_RightDriveMotorA;
+
+	//Sensors
+	Encoder* m_LeftDriveEncoder;
+	Encoder* m_RightDriveEncoder;
+
+
+	//
 //	Relay* m_Compressor;
 //	DigitalInput* m_PressureSwitch;
 //

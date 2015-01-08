@@ -10,7 +10,22 @@ PhoenixRobot::PhoenixRobot(){
 //	m_RightDriveA = new Talon(m_Constants->rightDrivePwmA);
 //	m_LeftDriveA = new Talon(m_Constants->leftDrivePwmA);
 
-	m_Drive = new DriveBase();
+
+	//Motors
+	m_LeftDriveMotorA = new Talon(m_Constants->PWM_LEFT_DRIVE_A);
+	m_RightDriveMotorA = new Talon(m_Constants->PWM_RIGHT_DRIVE_A);
+
+	//Sensors
+	m_LeftDriveEncoder = new Encoder((int)m_Constants->ENCODER_LEFT_DRIVE_A, (int)m_Constants->ENCODER_LEFT_DRIVE_B);
+	m_RightDriveEncoder = new Encoder((int)m_Constants->ENCODER_RIGHT_DRIVE_A, (int)m_Constants->ENCODER_RIGHT_DRIVE_B);
+
+
+	//Subsystems
+	m_Drive = new DriveBase(m_LeftDriveMotorA, m_RightDriveMotorA, m_LeftDriveEncoder, m_RightDriveEncoder);
+
+
+
+
 
 	//Robot Flag/States
 	m_leftDriveValue = 0;
