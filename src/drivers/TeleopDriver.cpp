@@ -14,7 +14,7 @@ TeleopDriver::TeleopDriver(Drive* drive, PhoenixControlBoard* controlBoard) : Dr
 bool TeleopDriver::UpdateDriver() {
 	if(ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_A))
 	{
-		drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y),ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
+		drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y),ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_X), ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
 	}
   // Operator drive control
 //  bool wantHighGear = !leftJoystick_->GetRawButton((int)constants_->highGearPort);
