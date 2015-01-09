@@ -108,13 +108,13 @@ void Drive::SetLinearPower(double leftPower, double rightPower){
 }
 
 void Drive::DriveWithHeading(double heading, double speed){
-
+return;
 }
 
 bool Drive::DriveDistanceWithHeading(double heading, double distance){
-
+return true;
 }
 
 double Drive::GetDriveDistance(){
-
+return 1.0;
 }

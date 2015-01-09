@@ -49,7 +49,7 @@ void TeleopDriver::Reset() {
 //  startRightJoystick_ = rightJoystick_->GetX();
 //  AskForBrake(false);
 }
-}
+
 
 TeleopDriver::~TeleopDriver() {
 }

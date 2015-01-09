@@ -25,11 +25,15 @@ RobotName::RobotName()
 	m_ControlBoard = new PhoenixControlBoard(m_DriverJoystick, m_OperatorJoystick);
 
 	// Drivers
-	m_CurrDriver = new Driver(m_Drive);
 	m_TeleopDriver = new TeleopDriver(m_Drive,m_ControlBoard);
+	m_CurrDriver = m_TeleopDriver;
 
 	//Subsystems
 	m_Drive = new Drive(m_LeftDriveMotorA, m_RightDriveMotorA, m_LeftDriveEncoder, m_RightDriveEncoder);
+
+	  prevLeftDist_ = 0.0;
+	  prevRightDist_ = 0.0;
+	  prevTime = 0.0;
 }
 
 void RobotName::ResetMotors()

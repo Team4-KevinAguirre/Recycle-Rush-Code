@@ -9,10 +9,11 @@
 #include <Subsystems/Drive.h>
 #include <WPILib.h>
 
-#include "Controllers/OperatorController.h"
-
 #include "Config/Constants.h"
 #include "PhoenixControlBoard.h"
+
+#include "drivers/Driver.h"
+#include "drivers/TeleopDriver.h"
 //#include "Controllers/AutoModeController.h"
 //#include "Autonomous/AutoModes.h"
 //#include "PhoenixLib/PhoenixLib.h"
@@ -59,7 +60,7 @@ private:
 	Joystick* m_OperatorJoystick;
 
 	//Control Board
-	PhoenixControlBoard m_ControlBoard;
+	PhoenixControlBoard* m_ControlBoard;
 
 
 	//Motors
