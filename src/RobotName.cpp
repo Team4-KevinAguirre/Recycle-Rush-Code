@@ -16,6 +16,7 @@ RobotName::RobotName()
 	//Pneumatics
 
 
+
 	//Joysticks
 	m_DriverJoystick = new Joystick(m_Constants->JOY_PORT_DRIVE);
 	m_OperatorJoystick = new Joystick(m_Constants->JOY_PORT_OPERATOR);
@@ -23,13 +24,17 @@ RobotName::RobotName()
 	//Control Board
 	m_ControlBoard = new PhoenixControlBoard(m_DriverJoystick, m_OperatorJoystick);
 
+	// Drivers
+	m_CurrDriver = new Driver(m_Drive);
+	m_TeleopDriver = new TeleopDriver(m_Drive,m_ControlBoard);
+
 	//Subsystems
-	m_Drivebase = new DriveBase(m_LeftDriveMotorA, m_RightDriveMotorA, m_LeftDriveEncoder, m_RightDriveEncoder);
+	m_Drive = new Drive(m_LeftDriveMotorA, m_RightDriveMotorA, m_LeftDriveEncoder, m_RightDriveEncoder);
 }
 
 void RobotName::ResetMotors()
 {
-	m_Drivebase->SetLinearPower(0,0);
+	m_Drive->SetLinearPower(0,0);
 }
 
 void RobotName::RobotInit()
@@ -50,14 +55,14 @@ void RobotName::TeleopInit()
 	m_Constants->LoadFile();
 	ResetMotors();
 	//m_Drivebase->ResetGyro();
-	m_Drivebase->ResetEncoders();
+	m_Drive->ResetEncoders();
 
 
 	  prevLeftDist_ = 0.0;
 	  prevRightDist_ = 0.0;
 	  prevTime = 0.0;
-//	  currDriver_ = teleopDriver_;
-//	  currDriver_->Reset();
+	  m_CurrDriver = m_TeleopDriver;
+	  m_CurrDriver->Reset();
 //	  timer_->Reset();
 
 	  //target_->SetUseSkew(true);
@@ -92,5 +97,12 @@ void RobotName::AutonomousPeriodic()
 }
 void RobotName::TeleopPeriodic()
 {
+
+
+
+
+
+
+
 
 }

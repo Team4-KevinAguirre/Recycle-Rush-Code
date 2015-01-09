@@ -6,12 +6,12 @@
 #define __ROBOT_NAME_H__
 
 //#include <hostLib.h>
+#include <Subsystems/Drive.h>
 #include <WPILib.h>
 
 #include "Controllers/OperatorController.h"
 
 #include "Config/Constants.h"
-#include "Subsystems/DriveBase.h"
 #include "PhoenixControlBoard.h"
 //#include "Controllers/AutoModeController.h"
 //#include "Autonomous/AutoModes.h"
@@ -48,9 +48,11 @@ private:
 	//Vision
 
 	//Subsystems
-	DriveBase* m_Drivebase;
+	Drive* m_Drive;
 
 	//Drivers
+	Driver* m_CurrDriver;
+	TeleopDriver* m_TeleopDriver;
 
 	//Joysticks
 	Joystick* m_DriverJoystick;
