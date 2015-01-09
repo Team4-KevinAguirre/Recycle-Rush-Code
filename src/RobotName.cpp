@@ -16,7 +16,6 @@ RobotName::RobotName()
 	//Pneumatics
 
 
-
 	//Joysticks
 	DriverJoystick_ = new Joystick(Constants_->JOY_PORT_DRIVE);
 	OperatorJoystick_ = new Joystick(Constants_->JOY_PORT_OPERATOR);
@@ -104,6 +103,8 @@ void RobotName::AutonomousPeriodic()
 }
 void RobotName::TeleopPeriodic()
 {
+
+CurrDriver_->UpdateDriver();
 
 
 
