@@ -22,6 +22,8 @@ public:
 
 	void DriveLeftRight(float leftDriveValue, float rightDriveValue);
 
+	void SetLinearPower(double leftPower, double rightPower);
+
 	void DriveWithHeading(double heading, double speed);
 
 	bool DriveDistanceWithHeading(double heading, double distance);

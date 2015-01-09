@@ -26,7 +26,7 @@ class PhoenixControlBoard
 {
 
 public:
-	PhoenixControlBoard();
+	PhoenixControlBoard(Joystick* DriveJoystick, Joystick* OperatorJoystick);
 	
 //	bool GetQuickTurn();
 //	bool GetAutoSelectButton();

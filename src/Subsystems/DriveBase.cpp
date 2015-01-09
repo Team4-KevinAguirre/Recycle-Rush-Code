@@ -102,6 +102,11 @@ void DriveBase::ResetEncoders() {
 	m_RightDriveEncoder->Reset();
 }
 
+void DriveBase::SetLinearPower(double leftPower, double rightPower){
+	SetLeftMotors(leftPower);
+	SetRightMotors(rightPower);
+}
+
 void DriveBase::DriveWithHeading(double heading, double speed){
 
 }

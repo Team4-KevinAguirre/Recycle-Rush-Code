@@ -1,13 +1,13 @@
 #include <PhoenixControlBoard.h>
 
 /// Constructor for Phoenix Control Board
-PhoenixControlBoard::PhoenixControlBoard()
+PhoenixControlBoard::PhoenixControlBoard(Joystick* DriveJoystick, Joystick* OperatorJoystick)
 //	:
 //	m_PreviousAuto(false)
 {
 	m_Constants = Constants::GetInstance();
-	m_DriveJoystick = new Joystick(m_Constants->JOY_PORT_DRIVE);
-	m_OperatorJoystick = new Joystick(m_Constants->JOY_PORT_OPERATOR);
+	m_DriveJoystick = DriveJoystick;
+	m_OperatorJoystick = OperatorJoystick;
 
 }
 

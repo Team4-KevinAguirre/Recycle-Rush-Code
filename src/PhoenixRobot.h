@@ -11,6 +11,7 @@
 #include "Config/Constants.h"
 #include "PhoenixLib/PhoenixLib.h"
 #include "Subsystems/DriveBase.h"
+
 //#include "Subsystems/Intake.h"
 //#include "Subsystems/Winch.h"
 //#include "CowLib/CowLib.h"
@@ -39,8 +40,8 @@ private:
 	Talon* m_RightDriveMotorA;
 
 	//Sensors
-	Encoder* m_LeftDriveEncoder;
-	Encoder* m_RightDriveEncoder;
+		Encoder* m_LeftDriveEncoder;
+		Encoder* m_RightDriveEncoder;
 
 
 	//

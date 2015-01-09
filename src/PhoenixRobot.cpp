@@ -1,5 +1,5 @@
+#include <RobotName.h>
 #include "PhoenixRobot.h"
-#include "PhoenixBase.h"
 
 
 PhoenixRobot::PhoenixRobot(){
@@ -18,7 +18,6 @@ PhoenixRobot::PhoenixRobot(){
 	//Sensors
 	m_LeftDriveEncoder = new Encoder((int)m_Constants->ENCODER_LEFT_DRIVE_A, (int)m_Constants->ENCODER_LEFT_DRIVE_B);
 	m_RightDriveEncoder = new Encoder((int)m_Constants->ENCODER_RIGHT_DRIVE_A, (int)m_Constants->ENCODER_RIGHT_DRIVE_B);
-
 
 	//Subsystems
 	m_Drive = new DriveBase(m_LeftDriveMotorA, m_RightDriveMotorA, m_LeftDriveEncoder, m_RightDriveEncoder);
