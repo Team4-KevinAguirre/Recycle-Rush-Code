@@ -4,13 +4,13 @@
 
 Drive::Drive(Talon* LeftDriveMotorA, Talon* RightDriveMotorA, Encoder* LeftDriveEncoder, Encoder* RightDriveEncoder){
 
-	m_Constants = Constants::GetInstance();
+	Constants_ = Constants::GetInstance();
 
-	m_LeftDriveMotor = LeftDriveMotorA;
-	m_RightDriveMotor = RightDriveMotorA;
+	LeftDriveMotor_ = LeftDriveMotorA;
+	RightDriveMotor_ = RightDriveMotorA;
 
-	m_LeftDriveEncoder = LeftDriveEncoder;
-	m_RightDriveEncoder = RightDriveEncoder;
+	LeftDriveEncoder_ = LeftDriveEncoder;
+	RightDriveEncoder_ = RightDriveEncoder;
 
 	m_leftDriveValue = 0.0;
 	m_rightDriveValue = 0.0;
@@ -53,7 +53,7 @@ void Drive::SetLeftMotors(float val){
 	else if(val > 1.0)
 		val = 1.0;
 
-	m_LeftDriveMotor->Set(-val);
+	LeftDriveMotor_->Set(-val);
 }
 
 void Drive::SetRightMotors(float val){
@@ -63,7 +63,7 @@ void Drive::SetRightMotors(float val){
 	else if(val > 1.0)
 		val = 1.0;
 
-	m_RightDriveMotor->Set(val);
+	RightDriveMotor_->Set(val);
 }
 
 void Drive::DriveLeftRight(float leftDriveValue, float rightDriveValue){
@@ -83,7 +83,7 @@ double Drive::GetLeftEncoderDistance(){
 	double gearRatioToWheel = 3.5;
 	double wheelSize = 6.0;
 
-	return (m_LeftDriveEncoder->Get()/ clicksPerRotation /gearRatioToWheel * wheelSize * m_Constants->PI);
+	return (LeftDriveEncoder_->Get()/ clicksPerRotation /gearRatioToWheel * wheelSize * Constants_->PI);
 }
 
 double Drive::GetRightEncoderDistance(){
@@ -94,12 +94,12 @@ double Drive::GetRightEncoderDistance(){
 	double gearRatioToWheel = 3.5;
 	double wheelSize = 6.0;
 
-	return (-m_RightDriveEncoder->Get()/ clicksPerRotation /gearRatioToWheel * wheelSize * m_Constants->PI);
+	return (-RightDriveEncoder_->Get()/ clicksPerRotation /gearRatioToWheel * wheelSize * Constants_->PI);
 }
 
 void Drive::ResetEncoders() {
-	m_LeftDriveEncoder->Reset();
-	m_RightDriveEncoder->Reset();
+	LeftDriveEncoder_->Reset();
+	RightDriveEncoder_->Reset();
 }
 
 void Drive::SetLinearPower(double leftPower, double rightPower){

@@ -44,33 +44,33 @@ public:
 private:
 
 	//Constants
-	Constants* m_Constants;
+	Constants* Constants_;
 
 	//Vision
 
 	//Subsystems
-	Drive* m_Drive;
+	Drive* Drive_;
 
 	//Drivers
-	Driver* m_CurrDriver;
-	TeleopDriver* m_TeleopDriver;
+	Driver* CurrDriver_;
+	TeleopDriver* TeleopDriver_;
 
 	//Joysticks
-	Joystick* m_DriverJoystick;
-	Joystick* m_OperatorJoystick;
+	Joystick* DriverJoystick_;
+	Joystick* OperatorJoystick_;
 
 	//Control Board
-	PhoenixControlBoard* m_ControlBoard;
+	PhoenixControlBoard* ControlBoard_;
 
 
 	//Motors
-	Talon* m_LeftDriveMotorA;
-	Talon* m_RightDriveMotorA;
+	Talon* LeftDriveMotorA_;
+	Talon* RightDriveMotorA_;
 
 
 	//Sensors
-	Encoder* m_LeftDriveEncoder;
-	Encoder* m_RightDriveEncoder;
+	Encoder* LeftDriveEncoder_;
+	Encoder* RightDriveEncoder_;
 
 	//Pneumatics
 

@@ -3,33 +3,36 @@
 RobotName::RobotName()
 
 {
-	m_Constants = Constants::GetInstance();
+	Constants_ = Constants::GetInstance();
 
 	//Motors
-	m_LeftDriveMotorA = new Talon(m_Constants->PWM_LEFT_DRIVE_A);
-	m_RightDriveMotorA = new Talon(m_Constants->PWM_RIGHT_DRIVE_A);
+	LeftDriveMotorA_ = new Talon(Constants_->PWM_LEFT_DRIVE_A);
+	RightDriveMotorA_ = new Talon(Constants_->PWM_RIGHT_DRIVE_A);
 
 	//Sensors
-	m_LeftDriveEncoder = new Encoder((int)m_Constants->ENCODER_LEFT_DRIVE_A, (int)m_Constants->ENCODER_LEFT_DRIVE_B);
-	m_RightDriveEncoder = new Encoder((int)m_Constants->ENCODER_RIGHT_DRIVE_A, (int)m_Constants->ENCODER_RIGHT_DRIVE_B);
+	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_LEFT_DRIVE_A, (int)Constants_->ENCODER_LEFT_DRIVE_B);
+	RightDriveEncoder_ = new Encoder((int)Constants_->ENCODER_RIGHT_DRIVE_A, (int)Constants_->ENCODER_RIGHT_DRIVE_B);
 
 	//Pneumatics
 
 
 
 	//Joysticks
-	m_DriverJoystick = new Joystick(m_Constants->JOY_PORT_DRIVE);
-	m_OperatorJoystick = new Joystick(m_Constants->JOY_PORT_OPERATOR);
+	DriverJoystick_ = new Joystick(Constants_->JOY_PORT_DRIVE);
+	OperatorJoystick_ = new Joystick(Constants_->JOY_PORT_OPERATOR);
 
 	//Control Board
-	m_ControlBoard = new PhoenixControlBoard(m_DriverJoystick, m_OperatorJoystick);
+	ControlBoard_ = new PhoenixControlBoard(DriverJoystick_, OperatorJoystick_);
 
-	// Drivers
-	m_TeleopDriver = new TeleopDriver(m_Drive,m_ControlBoard);
-	m_CurrDriver = m_TeleopDriver;
+
 
 	//Subsystems
-	m_Drive = new Drive(m_LeftDriveMotorA, m_RightDriveMotorA, m_LeftDriveEncoder, m_RightDriveEncoder);
+	Drive_ = new Drive(LeftDriveMotorA_, RightDriveMotorA_, LeftDriveEncoder_, RightDriveEncoder_);
+
+	// Drivers
+	TeleopDriver_ = new TeleopDriver(Drive_,ControlBoard_);
+	CurrDriver_ = TeleopDriver_;
+
 
 	  prevLeftDist_ = 0.0;
 	  prevRightDist_ = 0.0;
@@ -38,7 +41,7 @@ RobotName::RobotName()
 
 void RobotName::ResetMotors()
 {
-	m_Drive->SetLinearPower(0,0);
+	Drive_->SetLinearPower(0,0);
 }
 
 void RobotName::RobotInit()
@@ -56,17 +59,17 @@ void RobotName::AutonomousInit()
 }
 void RobotName::TeleopInit()
 {
-	m_Constants->LoadFile();
+	Constants_->LoadFile();
 	ResetMotors();
-	//m_Drivebase->ResetGyro();
-	m_Drive->ResetEncoders();
+	//Drive_base->ResetGyro();
+	Drive_->ResetEncoders();
 
 
 	  prevLeftDist_ = 0.0;
 	  prevRightDist_ = 0.0;
 	  prevTime = 0.0;
-	  m_CurrDriver = m_TeleopDriver;
-	  m_CurrDriver->Reset();
+	  CurrDriver_ = TeleopDriver_;
+	  CurrDriver_->Reset();
 //	  timer_->Reset();
 
 	  //target_->SetUseSkew(true);

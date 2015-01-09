@@ -38,9 +38,9 @@ public:
 	bool GetOperatorButton(unsigned int button);
 
 private:
-	Joystick* m_DriveJoystick;
-	Joystick* m_OperatorJoystick;
-	Constants* m_Constants;
+	Joystick* DriveJoystick_;
+	Joystick* OperatorJoystick_;
+	Constants* Constants_;
 
 };
 

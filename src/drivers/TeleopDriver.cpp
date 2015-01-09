@@ -5,8 +5,8 @@
 
 
 TeleopDriver::TeleopDriver(Drive* drive, PhoenixControlBoard* controlBoard) : Driver(drive) {
-  m_Constants = Constants::GetInstance();
-  m_ControlBoard = controlBoard;
+  Constants_ = Constants::GetInstance();
+  ControlBoard_ = controlBoard;
 
   Reset();
 }

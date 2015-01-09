@@ -41,8 +41,8 @@ class TeleopDriver : public Driver {
   virtual ~TeleopDriver();
 
  private:
-  Constants* m_Constants;
-  PhoenixControlBoard* m_ControlBoard;
+  Constants* Constants_;
+  PhoenixControlBoard* ControlBoard_;
 
 //
 //

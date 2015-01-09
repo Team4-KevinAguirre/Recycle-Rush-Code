@@ -43,13 +43,13 @@ public:
 private:
 	//Why put in private?
 
-	Constants* m_Constants;
+	Constants* Constants_;
 
-	Talon* m_LeftDriveMotor;
-	Talon* m_RightDriveMotor;
+	Talon* LeftDriveMotor_;
+	Talon* RightDriveMotor_;
 
-	Encoder* m_LeftDriveEncoder;
-	Encoder* m_RightDriveEncoder;
+	Encoder* LeftDriveEncoder_;
+	Encoder* RightDriveEncoder_;
 
 	float m_leftDriveValue;
 	float m_rightDriveValue;

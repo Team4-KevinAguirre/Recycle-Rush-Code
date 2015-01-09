@@ -5,28 +5,28 @@ PhoenixControlBoard::PhoenixControlBoard(Joystick* DriveJoystick, Joystick* Oper
 //	:
 //	m_PreviousAuto(false)
 {
-	m_Constants = Constants::GetInstance();
-	m_DriveJoystick = DriveJoystick;
-	m_OperatorJoystick = OperatorJoystick;
+	Constants_ = Constants::GetInstance();
+	DriveJoystick_ = DriveJoystick;
+	OperatorJoystick_ = OperatorJoystick;
 
 }
 
 
 float PhoenixControlBoard::GetDriveAxis(unsigned int axis){
 
-	return (m_DriveJoystick->GetRawAxis(axis));
+	return (DriveJoystick_->GetRawAxis(axis));
 }
 
 bool PhoenixControlBoard::GetDriveButton(unsigned int button){
-	return (m_DriveJoystick->GetRawButton(button));
+	return (DriveJoystick_->GetRawButton(button));
 }
 
 float PhoenixControlBoard::GetOperatorAxis(unsigned int axis){
-	return (m_OperatorJoystick->GetRawAxis(axis));
+	return (OperatorJoystick_->GetRawAxis(axis));
 }
 
 bool PhoenixControlBoard::GetOperatorButton(unsigned int button){
-	return (m_OperatorJoystick->GetRawButton(button));
+	return (OperatorJoystick_->GetRawButton(button));
 }
 
 /// Returns state of shifter switch
