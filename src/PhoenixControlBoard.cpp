@@ -9,23 +9,25 @@ PhoenixControlBoard::PhoenixControlBoard(Joystick* DriveJoystick, Joystick* Oper
 	DriveJoystick_ = DriveJoystick;
 	OperatorJoystick_ = OperatorJoystick;
 
+
 }
 
 
-float PhoenixControlBoard::GetDriveAxis(unsigned int axis){
-
+float PhoenixControlBoard::GetDriveAxis(int axis){
 	return (DriveJoystick_->GetRawAxis(axis));
 }
 
-bool PhoenixControlBoard::GetDriveButton(unsigned int button){
+bool PhoenixControlBoard::GetDriveButton(int button){
+
+	//return(DriveJoystick_->GetButton());
 	return (DriveJoystick_->GetRawButton(button));
 }
 
-float PhoenixControlBoard::GetOperatorAxis(unsigned int axis){
+float PhoenixControlBoard::GetOperatorAxis(int axis){
 	return (OperatorJoystick_->GetRawAxis(axis));
 }
 
-bool PhoenixControlBoard::GetOperatorButton(unsigned int button){
+bool PhoenixControlBoard::GetOperatorButton(int button){
 	return (OperatorJoystick_->GetRawButton(button));
 }
 

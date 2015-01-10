@@ -12,10 +12,17 @@ TeleopDriver::TeleopDriver(Drive* drive, PhoenixControlBoard* controlBoard) : Dr
 }
 
 bool TeleopDriver::UpdateDriver() {
-	if(ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_A))
-	{
+	//SmartDashboard::PutNumber("UpdateDriver init",1);
+	//std::cout<<"UpdateDriveroutside";
+//	if(ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_A))
+//	{
+	SmartDashboard::PutNumber("UpdateDriver inside Button",1);
+//		std::cout<<"UpdateDriverinside";
 		drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y),ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_X), ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
-	}
+//	} else
+//	{
+//		drive_->SetLinearPower(0,0);
+//	}
   // Operator drive control
 //  bool wantHighGear = !leftJoystick_->GetRawButton((int)constants_->highGearPort);
 //  bool quickTurning = rightJoystick_->GetRawButton((int)constants_->quickTurnPort);

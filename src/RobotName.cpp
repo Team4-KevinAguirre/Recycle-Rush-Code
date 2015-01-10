@@ -6,8 +6,8 @@ RobotName::RobotName()
 	Constants_ = Constants::GetInstance();
 
 	//Motors
-	LeftDriveMotorA_ = new Talon(Constants_->PWM_LEFT_DRIVE_A);
-	RightDriveMotorA_ = new Talon(Constants_->PWM_RIGHT_DRIVE_A);
+	LeftDriveMotorA_ = new Talon((int)Constants_->PWM_LEFT_DRIVE_A);
+	RightDriveMotorA_ = new Talon((int)Constants_->PWM_RIGHT_DRIVE_A);
 
 	//Sensors
 	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_LEFT_DRIVE_A, (int)Constants_->ENCODER_LEFT_DRIVE_B);
@@ -17,8 +17,8 @@ RobotName::RobotName()
 
 
 	//Joysticks
-	DriverJoystick_ = new Joystick(Constants_->JOY_PORT_DRIVE);
-	OperatorJoystick_ = new Joystick(Constants_->JOY_PORT_OPERATOR);
+	DriverJoystick_ = new Joystick((int)Constants_->JOY_PORT_DRIVE);
+	OperatorJoystick_ = new Joystick((int)Constants_->JOY_PORT_OPERATOR);
 
 	//Control Board
 	ControlBoard_ = new PhoenixControlBoard(DriverJoystick_, OperatorJoystick_);
@@ -103,7 +103,8 @@ void RobotName::AutonomousPeriodic()
 }
 void RobotName::TeleopPeriodic()
 {
-
+	SmartDashboard::PutNumber("Test1",1);
+	//std::cout<<"TeleopPeriodic";
 CurrDriver_->UpdateDriver();
 
 

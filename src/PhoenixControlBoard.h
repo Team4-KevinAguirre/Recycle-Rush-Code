@@ -31,16 +31,17 @@ public:
 //	bool GetQuickTurn();
 //	bool GetAutoSelectButton();
 
-	float GetDriveAxis(unsigned int axis);
-	bool GetDriveButton(unsigned int button);
+	float GetDriveAxis(int axis);
+	bool GetDriveButton(int button);
 
-	float GetOperatorAxis(unsigned int axis);
-	bool GetOperatorButton(unsigned int button);
+	float GetOperatorAxis(int axis);
+	bool GetOperatorButton(int button);
 
 private:
 	Joystick* DriveJoystick_;
 	Joystick* OperatorJoystick_;
 	Constants* Constants_;
+
 
 };
 

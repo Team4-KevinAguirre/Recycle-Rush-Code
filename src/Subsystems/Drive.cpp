@@ -43,7 +43,7 @@ void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 		float left_power = PhoenixLib::LimitMix(speed + turn);
 		float right_power = PhoenixLib::LimitMix(speed - turn);
 
-		DriveLeftRight(left_power, right_power);
+		SetLinearPower(left_power, right_power);
 }
 
 void Drive::SetLeftMotors(float val){
