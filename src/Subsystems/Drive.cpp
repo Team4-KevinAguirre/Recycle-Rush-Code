@@ -2,7 +2,7 @@
 //This is where we define everything.
 #include <Subsystems/Drive.h>
 
-Drive::Drive(Talon* LeftDriveMotorA, Talon* RightDriveMotorA, Encoder* LeftDriveEncoder, Encoder* RightDriveEncoder){
+Drive::Drive(Talon* LeftDriveMotorA, Talon* RightDriveMotorA, Encoder* LeftDriveEncoder, Encoder* RightDriveEncoder, Gyro* Gyro, DigitalInput* LimitSwitchMain){
 
 	Constants_ = Constants::GetInstance();
 
@@ -12,8 +12,23 @@ Drive::Drive(Talon* LeftDriveMotorA, Talon* RightDriveMotorA, Encoder* LeftDrive
 	LeftDriveEncoder_ = LeftDriveEncoder;
 	RightDriveEncoder_ = RightDriveEncoder;
 
+	GyroDrive_ = Gyro;
+
+	LimitSwitchMain_ = LimitSwitchMain;
+
 	m_leftDriveValue = 0.0;
 	m_rightDriveValue = 0.0;
+}
+
+
+
+void Drive::TankDrive(float left, float right, float joyValue) {
+	LeftDriveMotor_->Set(-left);
+	RightDriveMotor_->Set(right);
+
+	if (LimitSwitchMain_->Get()){
+		(Constants_->JOY_PORT_DRIVE);
+	}
 }
 
 void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
@@ -42,6 +57,7 @@ void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 
 		float left_power = PhoenixLib::LimitMix(speed + turn);
 		float right_power = PhoenixLib::LimitMix(speed - turn);
+		SmartDashboard::PutNumber("GyroNum", GyroDrive_->GetAngle());
 
 		SetLinearPower(left_power, right_power);
 }
@@ -100,6 +116,10 @@ double Drive::GetRightEncoderDistance(){
 void Drive::ResetEncoders() {
 	LeftDriveEncoder_->Reset();
 	RightDriveEncoder_->Reset();
+}
+
+void Drive::ResetGyro() {
+	GyroDrive_->Reset();
 }
 
 void Drive::SetLinearPower(double leftPower, double rightPower){

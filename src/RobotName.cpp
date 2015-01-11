@@ -12,6 +12,9 @@ RobotName::RobotName()
 	//Sensors
 	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_LEFT_DRIVE_A, (int)Constants_->ENCODER_LEFT_DRIVE_B);
 	RightDriveEncoder_ = new Encoder((int)Constants_->ENCODER_RIGHT_DRIVE_A, (int)Constants_->ENCODER_RIGHT_DRIVE_B);
+	GyroDrive_ = new Gyro(0);
+
+	LimitSwitchMain_ = new DigitalInput((int)Constants_->LIMIT_SWITCH_MAIN);
 
 	//Pneumatics
 
@@ -26,16 +29,12 @@ RobotName::RobotName()
 
 
 	//Subsystems
-	Drive_ = new Drive(LeftDriveMotorA_, RightDriveMotorA_, LeftDriveEncoder_, RightDriveEncoder_);
+	Drive_ = new Drive(LeftDriveMotorA_, RightDriveMotorA_, LeftDriveEncoder_, RightDriveEncoder_, GyroDrive_, LimitSwitchMain_);
 
 	// Drivers
 	TeleopDriver_ = new TeleopDriver(Drive_,ControlBoard_);
 	CurrDriver_ = TeleopDriver_;
 
-
-	  prevLeftDist_ = 0.0;
-	  prevRightDist_ = 0.0;
-	  prevTime = 0.0;
 }
 
 void RobotName::ResetMotors()
@@ -62,11 +61,8 @@ void RobotName::TeleopInit()
 	ResetMotors();
 	//Drive_base->ResetGyro();
 	Drive_->ResetEncoders();
+	Drive_->ResetGyro();
 
-
-	  prevLeftDist_ = 0.0;
-	  prevRightDist_ = 0.0;
-	  prevTime = 0.0;
 	  CurrDriver_ = TeleopDriver_;
 	  CurrDriver_->Reset();
 //	  timer_->Reset();
@@ -103,9 +99,13 @@ void RobotName::AutonomousPeriodic()
 }
 void RobotName::TeleopPeriodic()
 {
-	SmartDashboard::PutNumber("Test1",1);
 	//std::cout<<"TeleopPeriodic";
-CurrDriver_->UpdateDriver();
+//Driver Stuff handled in driver
+	CurrDriver_->UpdateDriver();
+
+	//other subsystems handled out here
+//if(Joystick Command)
+//	Actuate subsystem
 
 
 

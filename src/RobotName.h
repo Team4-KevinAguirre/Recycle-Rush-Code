@@ -72,13 +72,16 @@ private:
 	Encoder* LeftDriveEncoder_;
 	Encoder* RightDriveEncoder_;
 
+	Gyro* GyroDrive_;
+
+	DigitalInput* LimitSwitchMain_;
+
+	//DigitalInput* LimitA_;
+
 	//Pneumatics
 
 	//DriverStation* lcd;
 
-	  double prevLeftDist_;
-	  double prevRightDist_;
-	  double prevTime;
 
 };
 

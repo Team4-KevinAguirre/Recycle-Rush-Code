@@ -14,11 +14,14 @@ class Drive
 
 public:
 
-	Drive(Talon* leftDriveMotorA, Talon* rightDriveMotorA, Encoder* LeftDriveEncoder, Encoder* RightDriveEncoder); //This function is called the constructor
+	Drive(Talon* leftDriveMotorA, Talon* rightDriveMotorA, Encoder* LeftDriveEncoder, Encoder* RightDriveEncoder, Gyro* Gyro); //This function is called the constructor
 
 	//~Drive();//Destructor is the correct terminology.  This has to do with memory management.  We always need to release dynamically allocated memory.
 
 	void DriveSpeedTurn(float speed, float turn, bool quickTurn);
+
+
+	void TankDrive (float left, float right);
 
 	void DriveLeftRight(float leftDriveValue, float rightDriveValue);
 
@@ -36,6 +39,8 @@ public:
 
 	void ResetEncoders();
 
+	void ResetGyro();
+
 
 
 
@@ -48,8 +53,12 @@ private:
 	Talon* LeftDriveMotor_;
 	Talon* RightDriveMotor_;
 
+	Gyro* GyroDrive_;
+
 	Encoder* LeftDriveEncoder_;
 	Encoder* RightDriveEncoder_;
+
+	DigitalInput* LimitSwitchMain_;
 
 	float m_leftDriveValue;
 	float m_rightDriveValue;

@@ -18,8 +18,15 @@ bool TeleopDriver::UpdateDriver() {
 //	{
 	SmartDashboard::PutNumber("UpdateDriver inside Button",1);
 //		std::cout<<"UpdateDriverinside";
-		drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y),ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_X), ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
-//	} else
+		//drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y),ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_X), ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
+
+	drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_X), ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RJPRESS));
+
+	if(ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_B))
+			drive_->ResetGyro();
+
+	//SmartDashboard::PutBoolean("Limit", drive_->LimitSwitch());
+		//	} else
 //	{
 //		drive_->SetLinearPower(0,0);
 //	}
