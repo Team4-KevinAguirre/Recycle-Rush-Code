@@ -72,10 +72,6 @@ private:
 	Encoder* LeftDriveEncoder_;
 	Encoder* RightDriveEncoder_;
 
-	Gyro* GyroDrive_;
-
-	DigitalInput* LimitSwitchMain_;
-
 	//DigitalInput* LimitA_;
 
 	//Pneumatics

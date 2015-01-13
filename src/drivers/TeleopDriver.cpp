@@ -22,8 +22,6 @@ bool TeleopDriver::UpdateDriver() {
 
 	drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_X), ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RJPRESS));
 
-	if(ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_B))
-			drive_->ResetGyro();
 
 	//SmartDashboard::PutBoolean("Limit", drive_->LimitSwitch());
 		//	} else
