@@ -15,6 +15,8 @@ Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMo
 
 	DriveGyro_ = driveGyro;
 
+	TurnPid_ = new Pid(&Constants_->PID_DRIVE_TURN_KD,&Constants_->PID_DRIVE_TURN_KI, &Constants_->PID_DRIVE_TURN_KD);
+
 }
 
 void Drive::setLinearPower(double leftPower, double rightPower){
@@ -41,4 +43,10 @@ void Drive::rotateDrive(float turnIncrement){
 	setLinearPower(newLeft,newRight);
 }
 
+void Drive::rotateAbsoluteDrive(float rotationAngle){
+	float currAngle = DriveGyro_->GetAngle();
+	float setpointAngle = rotationAngle;
 
+	double power = TurnPid_->Update(setpointAngle, currAngle);
+	setLinearPower(-power, power);
+}

@@ -50,7 +50,8 @@ void RobotName::AutonomousInit()
 }
 void RobotName::TeleopInit()
 {
-
+Drive_->resetAbsoluteGyro();
+//Absolute Reset gyro once per teleop
 }
 
 void RobotName::DisabledContinuous()
@@ -70,7 +71,8 @@ void RobotName::TeleopContinuous()
 
 void RobotName::DisabledPeriodic()
 {
-
+Drive_->resetAbsoluteGyro();
+//Absolute Reset Gyro periodically
 }
 void RobotName::AutonomousPeriodic()
 {
@@ -82,4 +84,8 @@ void RobotName::TeleopPeriodic()
 	Drive_->setLinearPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y));
 	//Tank drive
 
+	Drive_->rotateDrive(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_L_TRIGGER));
+	//TODO: Just this doesn't support using both triggers.  Make sure that L_TRIGGER works in 2015 Mapping, and if so, subtract L-R.
+
+	Drive_->rotateAbsoluteDrive(ControlBoard_->GetDrivePOV());
 }

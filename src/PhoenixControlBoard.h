@@ -16,10 +16,15 @@ public:
 
 	float GetDriveAxis(int axis);
 	bool GetDriveButton(int button);
+	float GetDrivePOV();
+	//Returns the degree starting at up and going clockwise.
+	//TODO: Do we need to fix s.t. zero'd somewhere else?
 
 	float GetOperatorAxis(int axis);
 	bool GetOperatorButton(int button);
-
+	float GetOperatorPOV();
+	//Returns the degree starting at up and going clockwise.
+	//TODO: Do we need to fix s.t. zero'd somewhere else?
 private:
 	Joystick* DriveJoystick_;
 	Joystick* OperatorJoystick_;

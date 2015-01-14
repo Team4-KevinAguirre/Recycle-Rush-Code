@@ -6,6 +6,7 @@
 #include "WPILib.h"
 #include "../Config/Constants.h"
 #include "../Util/RelativeGyro.h"
+#include "Subsystems/Pid.h"
 
 
 class Drive
@@ -29,6 +30,7 @@ public:
 	//Used with "analog" joystick inputs (triggers, etc...) to rotate robot finely.
 	//TODO: Create a global rotation sensitivity constant.
 
+	void rotateAbsoluteDrive(float angle);
 
 
 private:
@@ -42,6 +44,8 @@ private:
 	Talon* RightDriveMotorB_;
 
 	RelativeGyro* DriveGyro_;
+
+	Pid* TurnPid_;
 
 };
 #endif
