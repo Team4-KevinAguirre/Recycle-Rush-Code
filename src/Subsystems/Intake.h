@@ -14,12 +14,16 @@ class Intake
 
 public:
 
-	Intake(); //This function is called the constructor
+	Intake(Victor* leftIntakeMotor, Victor* rightIntakeMotor); //This function is called the constructor
 
 
 private:
 
 	Constants* Constants_;
+
+	Victor* LeftIntakeMotor_;
+	Victor* RightIntakeMotor_;
+
 
 
 };

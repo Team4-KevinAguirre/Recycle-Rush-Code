@@ -12,6 +12,8 @@ RobotName::RobotName()
 	RightDriveMotorA_ = new Talon((int)Constants_->PWM_RIGHT_DRIVE_A);
 	RightDriveMotorB_ = new Talon((int)Constants_->PWM_RIGHT_DRIVE_B);
 
+	LeftIntakeMotor_ = new Victor((int)Constants_->PWM_LEFT_INTAKE);
+	RightIntakeMotor_ = new Victor((int)Constants_->PWM_RIGHT_INTAKE);
 	//Sensors
 	DriveGyro_ = new RelativeGyro((int)Constants_->GYRO_DRIVE);
 	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_DRIVE_LEFT);
@@ -27,7 +29,7 @@ RobotName::RobotName()
 
 	//Subsystems
 	Drive_ = new Drive(LeftDriveMotorA_, LeftDriveMotorB_, RightDriveMotorA_, RightDriveMotorB_, DriveGyro_, LeftDriveEncoder_, RightDriveEncoder_);
-
+	Intake_ = new Intake(LeftIntakeMotor_, RightIntakeMotor_);
 
 
 }

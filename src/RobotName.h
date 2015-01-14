@@ -47,6 +47,9 @@ private:
 	Talon* RightDriveMotorA_;
 	Talon* RightDriveMotorB_;
 
+	Victor* LeftIntakeMotor_;
+	Victor* RightIntakeMotor_;
+
 	//Sensors
 	RelativeGyro* DriveGyro_;
 	Encoder* LeftDriveEncoder_;
@@ -61,6 +64,7 @@ private:
 
 	//Subsystems
 	Drive* Drive_;
+	Intake* Intake_;
 
 };
 
