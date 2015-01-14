@@ -17,6 +17,18 @@ public:
 	//Tank Drive
 	void setLinearPower(double leftPower, double rightPower);
 
+	void resetGyro();
+	//Relative Reset of Gyro.  Simply offsets the absolute angle, so we still have absolute control.
+	//Need to perform this when we want to hold relative to a certain location.
+
+	void resetAbsoluteGyro();
+	//Absolute reset of gyro.  Because of calibration errors, do not perform this on a periodic basis.  Perform this
+	//at Init states.
+
+	void rotateDrive(float turnIncrement);
+	//Used with "analog" joystick inputs (triggers, etc...) to rotate robot finely.
+	//TODO: Create a global rotation sensitivity constant.
+
 
 
 private:
