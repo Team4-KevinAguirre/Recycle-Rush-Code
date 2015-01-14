@@ -9,11 +9,13 @@
 
 class Drive
 {
-	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB);
+
 
 public:
+	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB);
+	//Tank Drive
+	void setLinearPower(double leftPower, double rightPower);
 
-	void setLinearPower();
 
 
 private:

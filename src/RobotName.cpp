@@ -74,6 +74,9 @@ void RobotName::AutonomousPeriodic()
 }
 void RobotName::TeleopPeriodic()
 {
+	//Drive Stuff up here
+	Drive_->setLinearPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y))
+	//Tank drive
 
 
 }

@@ -15,3 +15,10 @@ Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMo
 
 }
 
+void Drive::setLinearPower(double leftPower, double rightPower){
+	leftDriveMotorA_->Set(PwmLimit(leftPower));
+	leftDriveMotorB_->Set(PwmLimit(leftPower));
+	rightDriveMotorA_->Set(PwmLimit(rightPower));
+	rightDriveMotorB_->Set(PwmLimit(rightPower));
+
+}
