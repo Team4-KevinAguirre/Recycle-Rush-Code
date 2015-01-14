@@ -88,4 +88,5 @@ void RobotName::TeleopPeriodic()
 	//TODO: Just this doesn't support using both triggers.  Make sure that L_TRIGGER works in 2015 Mapping, and if so, subtract L-R.
 
 	Drive_->rotateAbsoluteDrive(ControlBoard_->GetDrivePOV());
+	//Should take user POV (D-PAD input).  When pressed, the robot will rotate to where it was absolutely zero'd.
 }
