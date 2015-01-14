@@ -5,6 +5,7 @@
 
 #include "WPILib.h"
 #include "../Config/Constants.h"
+#include "../Util/RelativeGyro.h"
 
 
 class Drive
@@ -12,7 +13,7 @@ class Drive
 
 
 public:
-	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB);
+	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro);
 	//Tank Drive
 	void setLinearPower(double leftPower, double rightPower);
 
@@ -23,12 +24,12 @@ private:
 	Constants* Constants_;
 
 	//Motors
-	Talon* leftDriveMotorA_;
-	Talon* leftDriveMotorB_;
-	Talon* rightDriveMotorA_;
-	Talon* rightDriveMotorB_;
+	Talon* LeftDriveMotorA_;
+	Talon* LeftDriveMotorB_;
+	Talon* RightDriveMotorA_;
+	Talon* RightDriveMotorB_;
 
-
+	RelativeGyro* DriveGyro_;
 
 };
 #endif

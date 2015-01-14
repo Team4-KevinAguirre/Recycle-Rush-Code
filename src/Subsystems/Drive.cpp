@@ -2,23 +2,26 @@
 //This is where we define everything.
 #include "Drive.h"
 
-Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB){
+Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro){
 
 	Constants_ = Constants::GetInstance();
 
 	//Motors
-	leftDriveMotorA_ = leftDriveMotorA;
-	leftDriveMotorB_ = leftDriveMotorB;
+	LeftDriveMotorA_ = leftDriveMotorA;
+	LeftDriveMotorB_ = leftDriveMotorB;
 
-	rightDriveMotorA_ = rightDriveMotorA;
-	rightDriveMotorB_ = rightDriveMotorB;
+	RightDriveMotorA_ = rightDriveMotorA;
+	RightDriveMotorB_ = rightDriveMotorB;
+
+	DriveGyro_ = driveGyro;
 
 }
 
 void Drive::setLinearPower(double leftPower, double rightPower){
-	leftDriveMotorA_->Set(PwmLimit(leftPower));
-	leftDriveMotorB_->Set(PwmLimit(leftPower));
-	rightDriveMotorA_->Set(PwmLimit(rightPower));
-	rightDriveMotorB_->Set(PwmLimit(rightPower));
+	LeftDriveMotorA_->Set(PwmLimit(leftPower));
+	LeftDriveMotorB_->Set(PwmLimit(leftPower));
+	RightDriveMotorA_->Set(PwmLimit(rightPower));
+	RightDriveMotorB_->Set(PwmLimit(rightPower));
 
 }
+

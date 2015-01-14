@@ -10,6 +10,7 @@
 #include "Subsystems/Conveyor.h"
 #include "Subsystems/Intake.h"
 #include <WPILib.h>
+#include "Util/RelativeGyro.h"
 
 #include "Config/Constants.h"
 #include "PhoenixControlBoard.h"
@@ -41,10 +42,13 @@ private:
 
 
 	//Motors
-	Talon* leftDriveMotorA_;
-	Talon* leftDriveMotorB_;
-	Talon* rightDriveMotorA_;
-	Talon* rightDriveMotorB_;
+	Talon* LeftDriveMotorA_;
+	Talon* LeftDriveMotorB_;
+	Talon* RightDriveMotorA_;
+	Talon* RightDriveMotorB_;
+
+	//Sensors
+	RelativeGyro* DriveGyro_;
 
 	//Joysticks
 	Joystick* DriverJoystick_;

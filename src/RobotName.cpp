@@ -6,10 +6,14 @@ RobotName::RobotName()
 	Constants_ = Constants::GetInstance();
 
 	//Motors
-	leftDriveMotorA_ = new Talon((int)Constants_->PWM_LEFT_DRIVE_A);
-	leftDriveMotorB_ = new Talon((int)Constants_->PWM_LEFT_DRIVE_B);
-	rightDriveMotorA_ = new Talon((int)Constants_->PWM_RIGHT_DRIVE_A);
-	rightDriveMotorB_ = new Talon((int)Constants_->PWM_RIGHT_DRIVE_B);
+
+	LeftDriveMotorA_ = new Talon((int)Constants_->PWM_LEFT_DRIVE_A);
+	LeftDriveMotorB_ = new Talon((int)Constants_->PWM_LEFT_DRIVE_B);
+	RightDriveMotorA_ = new Talon((int)Constants_->PWM_RIGHT_DRIVE_A);
+	RightDriveMotorB_ = new Talon((int)Constants_->PWM_RIGHT_DRIVE_B);
+
+	//Sensors
+	DriveGyro_ = new RelativeGyro((int)Constants_->GYRO_DRIVE);
 
 	//Joysticks
 	DriverJoystick_ = new Joystick((int)Constants_->JOY_PORT_DRIVE);
@@ -20,7 +24,7 @@ RobotName::RobotName()
 
 
 	//Subsystems
-	Drive_ = new Drive(leftDriveMotorA_, leftDriveMotorB_, rightDriveMotorA_, rightDriveMotorB_);
+	Drive_ = new Drive(LeftDriveMotorA_, LeftDriveMotorB_, RightDriveMotorA_, RightDriveMotorB_, DriveGyro_);
 
 
 
@@ -75,8 +79,7 @@ void RobotName::AutonomousPeriodic()
 void RobotName::TeleopPeriodic()
 {
 	//Drive Stuff up here
-	Drive_->setLinearPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y))
+	Drive_->setLinearPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y));
 	//Tank drive
-
 
 }
