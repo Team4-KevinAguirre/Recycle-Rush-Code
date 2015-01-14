@@ -40,6 +40,21 @@ private:
 	Constants* Constants_;
 
 
+	//Motors
+	Talon* leftDriveMotorA_;
+	Talon* leftDriveMotorB_;
+	Talon* rightDriveMotorA_;
+	Talon* rightDriveMotorB_;
+
+	//Joysticks
+	Joystick* DriverJoystick_;
+	Joystick* OperatorJoystick_;
+
+	//Control Board
+	PhoenixControlBoard* ControlBoard_;
+
+	//Subsystems
+	Drive* Drive_;
 
 };
 

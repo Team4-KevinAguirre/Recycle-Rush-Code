@@ -9,14 +9,23 @@
 
 class Drive
 {
-
+	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB);
 
 public:
+
+	void setLinearPower();
 
 
 private:
 
 	Constants* Constants_;
+
+	//Motors
+	Talon* leftDriveMotorA_;
+	Talon* leftDriveMotorB_;
+	Talon* rightDriveMotorA_;
+	Talon* rightDriveMotorB_;
+
 
 
 };
