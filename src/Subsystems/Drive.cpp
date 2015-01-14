@@ -2,7 +2,7 @@
 //This is where we define everything.
 #include "Drive.h"
 
-Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro){
+Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro, Encoder* leftDriveEncoder, Encoder* rightDriveEncoder){
 
 	Constants_ = Constants::GetInstance();
 
@@ -13,7 +13,11 @@ Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMo
 	RightDriveMotorA_ = rightDriveMotorA;
 	RightDriveMotorB_ = rightDriveMotorB;
 
+	//Sensors
 	DriveGyro_ = driveGyro;
+	LeftDriveEncoder_ = leftDriveEncoder;
+	RightDriveEncoder_ = rightDriveEncoder;
+
 
 	TurnPid_ = new Pid(&Constants_->PID_DRIVE_TURN_KD,&Constants_->PID_DRIVE_TURN_KI, &Constants_->PID_DRIVE_TURN_KD);
 

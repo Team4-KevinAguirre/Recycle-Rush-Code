@@ -49,6 +49,8 @@ private:
 
 	//Sensors
 	RelativeGyro* DriveGyro_;
+	Encoder* LeftDriveEncoder_;
+	Encoder* RightDriveEncoder_;
 
 	//Joysticks
 	Joystick* DriverJoystick_;

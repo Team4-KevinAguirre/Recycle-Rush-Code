@@ -14,7 +14,7 @@ class Drive
 
 
 public:
-	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro);
+	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro, Encoder* leftDriveEncoder, Encoder* rightDriveEncoder);
 	//Tank Drive
 	void setLinearPower(double leftPower, double rightPower);
 
@@ -43,7 +43,11 @@ private:
 	Talon* RightDriveMotorA_;
 	Talon* RightDriveMotorB_;
 
+	//Sensors
 	RelativeGyro* DriveGyro_;
+	Encoder* LeftDriveEncoder_;
+	Encoder* RightDriveEncoder_;
+
 
 	Pid* TurnPid_;
 
