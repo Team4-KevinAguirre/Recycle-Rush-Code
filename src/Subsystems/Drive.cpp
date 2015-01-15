@@ -42,8 +42,8 @@ void Drive::resetAbsoluteGyro(){
 void Drive::rotateDrive(float turnIncrement){
 	//TODO: Remove newLeft/newRight because memory waste.  Put in here for ease of reading.
 	float sens = .01;
-	float newLeft = ((LeftDriveMotorA_->Get)+turnIncrement*sens);
-	float newRight = ((RightDriveMotorA_->Get)+turnIncrement*sens);
+	float newLeft = ((LeftDriveMotorA_->Get())+turnIncrement*sens);
+	float newRight = ((RightDriveMotorA_->Get())+turnIncrement*sens);
 	setLinearPower(newLeft,newRight);
 }
 
