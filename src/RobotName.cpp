@@ -93,4 +93,8 @@ void RobotName::TeleopPeriodic()
 
 	Drive_->rotateAbsoluteDrive(ControlBoard_->GetDrivePOV());
 	//Should take user POV (D-PAD input).  When pressed, the robot will rotate to where it was absolutely zero'd.
+
+	Intake_->SetIntakeMotorsLinear(ControlBoard_->GetOperatorAxis(Constants_->JOY_AXIS_LJ_Y));
+
+	Intake_->SetIntakeMotorsRotate(ControlBoard_->GetOperatorAxis(Constants_->JOY_AXIS_RJ_X));
 }
