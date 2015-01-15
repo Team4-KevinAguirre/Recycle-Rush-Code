@@ -14,8 +14,8 @@ RobotName::RobotName()
 
 	//Sensors
 	DriveGyro_ = new RelativeGyro((int)Constants_->GYRO_DRIVE);
-	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_DRIVE_LEFT);
-	RightDriveEncoder_ = new Encoder((int)Constants_->ENCODER_DRIVE_RIGHT);
+	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_LEFT_DRIVE_A, (int)Constants_->ENCODER_LEFT_DRIVE_B);
+	RightDriveEncoder_ = new Encoder((int)Constants_->ENCODER_RIGHT_DRIVE_A, (int)Constants_->ENCODER_RIGHT_DRIVE_B);
 
 	//Joysticks
 	DriverJoystick_ = new Joystick((int)Constants_->JOY_PORT_DRIVE);
