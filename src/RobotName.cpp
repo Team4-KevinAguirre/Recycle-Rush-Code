@@ -84,17 +84,18 @@ void RobotName::AutonomousPeriodic()
 }
 void RobotName::TeleopPeriodic()
 {
-	//Drive Stuff up here
-	Drive_->setLinearPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y));
-	//Tank drive
-
-	Drive_->rotateDrive(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_L_TRIGGER));
-	//TODO: Just this doesn't support using both triggers.  Make sure that L_TRIGGER works in 2015 Mapping, and if so, subtract L-R.
-
-	Drive_->rotateAbsoluteDrive(ControlBoard_->GetDrivePOV());
-	//Should take user POV (D-PAD input).  When pressed, the robot will rotate to where it was absolutely zero'd.
-
-	Intake_->SetIntakeMotorsLinear(ControlBoard_->GetOperatorAxis(Constants_->JOY_AXIS_LJ_Y));
-
-	Intake_->SetIntakeMotorsRotate(ControlBoard_->GetOperatorAxis(Constants_->JOY_AXIS_RJ_X));
+	Drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y),ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_X),ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
+//	//Drive Stuff up here
+	//Drive_->SetLinearPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y));
+//	//Tank drive
+//
+//	Drive_->rotateDrive(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_L_TRIGGER));
+//	//TODO: Just this doesn't support using both triggers.  Make sure that L_TRIGGER works in 2015 Mapping, and if so, subtract L-R.
+//
+//	Drive_->rotateAbsoluteDrive(ControlBoard_->GetDrivePOV());
+//	//Should take user POV (D-PAD input).  When pressed, the robot will rotate to where it was absolutely zero'd.
+//
+//	Intake_->SetIntakeMotorsLinear(ControlBoard_->GetOperatorAxis(Constants_->JOY_AXIS_LJ_Y));
+//
+//	Intake_->SetIntakeMotorsRotate(ControlBoard_->GetOperatorAxis(Constants_->JOY_AXIS_RJ_X));
 }

@@ -16,11 +16,12 @@ class Drive
 public:
 	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro, Encoder* leftDriveEncoder, Encoder* rightDriveEncoder);
 	//Tank Drive
-	void setLinearPower(double leftPower, double rightPower);
+	void SetLinearPower(double leftPower, double rightPower);
+	//Adjusted st. positive is forward.
 
-	void resetGyro();
 	//Relative Reset of Gyro.  Simply offsets the absolute angle, so we still have absolute control.
 	//Need to perform this when we want to hold relative to a certain location.
+	void resetGyro();
 
 	void resetAbsoluteGyro();
 	//Absolute reset of gyro.  Because of calibration errors, do not perform this on a periodic basis.  Perform this
@@ -32,6 +33,7 @@ public:
 
 	void rotateAbsoluteDrive(float angle);
 
+	void DriveSpeedTurn(float throttle, float turn, bool quickturn);
 
 private:
 
