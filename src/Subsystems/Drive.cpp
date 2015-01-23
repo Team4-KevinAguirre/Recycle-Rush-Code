@@ -23,38 +23,6 @@ Drive::Drive(VictorSP* leftDriveMotorA, VictorSP* leftDriveMotorB, VictorSP* rig
 
 }
 
-void Drive::SetLinearPower(double leftPower, double rightPower){
-	LeftDriveMotorA_->Set(PwmLimit(-leftPower));
-	LeftDriveMotorB_->Set(PwmLimit(-leftPower));
-	RightDriveMotorA_->Set(PwmLimit(rightPower));
-	RightDriveMotorB_->Set(PwmLimit(rightPower));
-
-}
-
-void Drive::resetGyro(){
-	DriveGyro_->Reset();
-}
-
-void Drive::resetAbsoluteGyro(){
-	DriveGyro_->ResetAbsolute();
-}
-
-void Drive::rotateDrive(float turnIncrement){
-	//TODO: Remove newLeft/newRight because memory waste.  Put in here for ease of reading.
-	float sens = .01;
-	float newLeft = ((LeftDriveMotorA_->Get())+turnIncrement*sens);
-	float newRight = ((RightDriveMotorA_->Get())+turnIncrement*sens);
-	SetLinearPower(newLeft,newRight);
-}
-
-void Drive::rotateAbsoluteDrive(float rotationAngle){
-	float currAngle = DriveGyro_->GetAngle();
-	float setpointAngle = rotationAngle;
-
-	double power = TurnPid_->Update(setpointAngle, currAngle);
-	SetLinearPower(-power, power);
-}
-
 void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 	float temp_vel = speed;
 		float sensitivity = 0;
@@ -84,5 +52,61 @@ void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 		float left_power = speed - turn;
 		float right_power = speed + turn;
 
-		SetLinearPower(left_power, right_power);
+		SmartDashboard::PutNumber("Drive Left",left_power);
+		SmartDashboard::PutNumber("Drive Right", right_power);
+
+		SetPower(left_power, right_power);
+
+}
+
+void Drive::rotateDrive(float turnIncrement){
+	//TODO: Remove newLeft/newRight because memory waste.  Put in here for ease of reading.
+	float sens = .01;
+	float newLeft = ((LeftDriveMotorA_->Get())+turnIncrement*sens);
+	float newRight = ((RightDriveMotorA_->Get())+turnIncrement*sens);
+	SetPower(newLeft,newRight);
+}
+
+void Drive::rotateAbsoluteDrive(float rotationAngle){
+	float currAngle = DriveGyro_->GetAngle();
+	float setpointAngle = rotationAngle;
+
+	double power = TurnPid_->Update(setpointAngle, currAngle);
+	SetPower(-power, power);
+}
+
+double Drive::GetLeftEncoderDistance() {
+	//Get() returns encoder clicks
+	//TODO: 256 is encoder ticks per rotation
+	//6.0*pi is the circumference of the wheel
+	return(-LeftDriveEncoder_->Get()/256 *6.0 *3.14159265);
+}
+
+double Drive::GetRightEncoderDistance() {
+	return(RightDriveEncoder_->Get()/256 *6.0 *3.14159265);
+}
+
+double Drive::GetGyroAngle() {
+	return DriveGyro_->GetAngle();
+}
+
+void Drive::ResetGyro(){
+	DriveGyro_->Reset();
+}
+
+void Drive::resetAbsoluteGyro(){
+	DriveGyro_->ResetAbsolute();
+}
+
+void Drive::ResetEncoders() {
+	LeftDriveEncoder_->Reset();
+	RightDriveEncoder_->Reset();
+}
+
+void Drive::SetPower(double leftPower, double rightPower){
+	LeftDriveMotorA_->Set(PwmLimit(-leftPower));
+	LeftDriveMotorB_->Set(PwmLimit(-leftPower));
+	RightDriveMotorA_->Set(PwmLimit(rightPower));
+	RightDriveMotorB_->Set(PwmLimit(rightPower));
+
 }
