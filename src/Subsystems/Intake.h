@@ -14,13 +14,28 @@ class Intake
 
 public:
 
-	Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor); //This function is called the constructor
+	/*
+	 * Constructor
+	 * All electronics are passed into the Intake Subsystem for use.
+	 */
+	Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor);
 
+	/**
+	 * Function to directly interface with the motors.
+	 * Positive Value Intakes, which a negative value Spits out.
+	 * TODO: Make sure the correct motor is set negative.
+	 */
 	void SetIntakeMotors(float intakePowerLeft, float intakePowerRight);
-	//Make positive value intake inwards, while negative value intake outwards.  Therefore, one of the motors need to be neg.
+
+	/**
+	 * Convenience function to intake/expel objects.
+	 */
 
 	void SetIntakeMotorsLinear(float intakePower);
 
+	/**
+	 * Convenience function to rotate objects.
+	 */
 	void SetIntakeMotorsRotate(float intakePower);
 private:
 
