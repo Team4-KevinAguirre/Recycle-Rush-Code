@@ -25,11 +25,7 @@ bool PhoenixControlBoard::GetDriveButton(int button){
 
 float PhoenixControlBoard::GetDrivePOV(){
 	return ((DriveJoystick_->GetPOV())*45);
-<<<<<<< HEAD
 }
-=======
-	}
->>>>>>> Drive
 
 float PhoenixControlBoard::GetOperatorAxis(int axis){
 	if(axis == (int)Constants_->JOY_AXIS_LJ_Y || axis == (int)Constants_->JOY_AXIS_RJ_Y)
