@@ -14,7 +14,7 @@ class Drive
 
 
 public:
-	Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro, Encoder* leftDriveEncoder, Encoder* rightDriveEncoder);
+	Drive(VictorSP* leftDriveMotorA, VictorSP* leftDriveMotorB, VictorSP* rightDriveMotorA, VictorSP* rightDriveMotorB, RelativeGyro* driveGyro, Encoder* leftDriveEncoder, Encoder* rightDriveEncoder);
 	//Tank Drive
 	void SetLinearPower(double leftPower, double rightPower);
 	//Adjusted st. positive is forward.
@@ -40,10 +40,10 @@ private:
 	Constants* Constants_;
 
 	//Motors
-	Talon* LeftDriveMotorA_;
-	Talon* LeftDriveMotorB_;
-	Talon* RightDriveMotorA_;
-	Talon* RightDriveMotorB_;
+	VictorSP* LeftDriveMotorA_;
+	VictorSP* LeftDriveMotorB_;
+	VictorSP* RightDriveMotorA_;
+	VictorSP* RightDriveMotorB_;
 
 	//Sensors
 	RelativeGyro* DriveGyro_;
