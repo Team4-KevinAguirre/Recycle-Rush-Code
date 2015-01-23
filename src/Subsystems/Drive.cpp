@@ -2,7 +2,7 @@
 //This is where we define everything.
 #include "Drive.h"
 
-Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMotorA, Talon* rightDriveMotorB, RelativeGyro* driveGyro, Encoder* leftDriveEncoder, Encoder* rightDriveEncoder){
+Drive::Drive(VictorSP* leftDriveMotorA, VictorSP* leftDriveMotorB, VictorSP* rightDriveMotorA, VictorSP* rightDriveMotorB, RelativeGyro* driveGyro, Encoder* leftDriveEncoder, Encoder* rightDriveEncoder){
 
 	Constants_ = Constants::GetInstance();
 
@@ -23,9 +23,9 @@ Drive::Drive(Talon* leftDriveMotorA, Talon* leftDriveMotorB, Talon* rightDriveMo
 
 }
 
-void Drive::setLinearPower(double leftPower, double rightPower){
-	LeftDriveMotorA_->Set(PwmLimit(leftPower));
-	LeftDriveMotorB_->Set(PwmLimit(leftPower));
+void Drive::SetLinearPower(double leftPower, double rightPower){
+	LeftDriveMotorA_->Set(PwmLimit(-leftPower));
+	LeftDriveMotorB_->Set(PwmLimit(-leftPower));
 	RightDriveMotorA_->Set(PwmLimit(rightPower));
 	RightDriveMotorB_->Set(PwmLimit(rightPower));
 
@@ -42,9 +42,9 @@ void Drive::resetAbsoluteGyro(){
 void Drive::rotateDrive(float turnIncrement){
 	//TODO: Remove newLeft/newRight because memory waste.  Put in here for ease of reading.
 	float sens = .01;
-	float newLeft = ((LeftDriveMotorA_->Get)+turnIncrement*sens);
-	float newRight = ((RightDriveMotorA_->Get)+turnIncrement*sens);
-	setLinearPower(newLeft,newRight);
+	float newLeft = ((LeftDriveMotorA_->Get())+turnIncrement*sens);
+	float newRight = ((RightDriveMotorA_->Get())+turnIncrement*sens);
+	SetLinearPower(newLeft,newRight);
 }
 
 void Drive::rotateAbsoluteDrive(float rotationAngle){
@@ -52,5 +52,37 @@ void Drive::rotateAbsoluteDrive(float rotationAngle){
 	float setpointAngle = rotationAngle;
 
 	double power = TurnPid_->Update(setpointAngle, currAngle);
-	setLinearPower(-power, power);
+	SetLinearPower(-power, power);
+}
+
+void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
+	float temp_vel = speed;
+		float sensitivity = 0;
+		//float unscaled_turn = 0;
+		if (temp_vel < 0)
+			temp_vel = -temp_vel;
+
+		//printf("Velocity: %f, stick: %f\r\n", velocity, temp_vel);
+
+		if(speed < 0.10 && speed > -0.10)
+			speed = 0;
+		if ((turn < 0.10 && turn > -0.10) || (speed == 0 && !quickTurn))
+			turn = 0;
+
+		//unscaled_turn = turn;
+
+		if(quickTurn) {
+			sensitivity = 1;
+			speed = 0;
+		}
+		else
+			sensitivity = 0.4;
+
+		turn *= sensitivity;
+		turn = -turn;
+
+		float left_power = speed - turn;
+		float right_power = speed + turn;
+
+		SetLinearPower(left_power, right_power);
 }

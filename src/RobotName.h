@@ -42,13 +42,13 @@ private:
 
 
 	//Motors
-	Talon* LeftDriveMotorA_;
-	Talon* LeftDriveMotorB_;
-	Talon* RightDriveMotorA_;
-	Talon* RightDriveMotorB_;
+	VictorSP* LeftDriveMotorA_;
+	VictorSP* LeftDriveMotorB_;
+	VictorSP* RightDriveMotorA_;
+	VictorSP* RightDriveMotorB_;
 
-	Victor* LeftIntakeMotor_;
-	Victor* RightIntakeMotor_;
+	VictorSP* LeftIntakeMotor_;
+	VictorSP* RightIntakeMotor_;
 
 	//Sensors
 	RelativeGyro* DriveGyro_;
