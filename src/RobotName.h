@@ -50,6 +50,11 @@ private:
 	VictorSP* LeftIntakeMotor_;
 	VictorSP* RightIntakeMotor_;
 
+
+	//Pneumatics
+	DoubleSolenoid* LeftIntakeArm_;
+	DoubleSolenoid* RightIntakeArm_;
+
 	//Sensors
 	RelativeGyro* DriveGyro_;
 	Encoder* LeftDriveEncoder_;

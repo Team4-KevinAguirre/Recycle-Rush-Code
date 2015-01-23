@@ -18,7 +18,7 @@ public:
 	 * Constructor
 	 * All electronics are passed into the Intake Subsystem for use.
 	 */
-	Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor);
+	Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor, DoubleSolenoid* leftIntakeArm, DoubleSolenoid* rightIntakeArm);
 
 	/**
 	 * Function to directly interface with the motors.
@@ -44,7 +44,8 @@ private:
 	VictorSP* LeftIntakeMotor_;
 	VictorSP* RightIntakeMotor_;
 
-
+	DoubleSolenoid* LeftIntakeArm_;
+	DoubleSolenoid* RightIntakeArm_;
 
 };
 
