@@ -14,7 +14,7 @@ class Intake
 
 public:
 
-	Intake(Victor* leftIntakeMotor, Victor* rightIntakeMotor); //This function is called the constructor
+	Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor); //This function is called the constructor
 
 	void SetIntakeMotors(float intakePowerLeft, float intakePowerRight);
 	//Make positive value intake inwards, while negative value intake outwards.  Therefore, one of the motors need to be neg.
@@ -26,8 +26,8 @@ private:
 
 	Constants* Constants_;
 
-	Victor* LeftIntakeMotor_;
-	Victor* RightIntakeMotor_;
+	VictorSP* LeftIntakeMotor_;
+	VictorSP* RightIntakeMotor_;
 
 
 

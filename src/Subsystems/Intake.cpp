@@ -1,6 +1,6 @@
 #include "Intake.h"
 
-Intake::Intake(Victor* leftIntakeMotor, Victor* rightIntakeMotor){
+Intake::Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor){
 
 	Constants_ = Constants::GetInstance();
 
