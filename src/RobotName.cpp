@@ -18,6 +18,7 @@ RobotName::RobotName()
 	//Pneumatics
 	LeftIntakeArm_ = new DoubleSolenoid((int)Constants_->SOLENOID_LEFT_ARM_FWD,(int)Constants_->SOLENOID_LEFT_ARM_REV);
 	RightIntakeArm_ = new DoubleSolenoid((int)Constants_->SOLENOID_RIGHT_ARM_FWD,(int)Constants_->SOLENOID_RIGHT_ARM_REV);
+	Compressor_ = new Compressor((int)Constants_->COMPRESSOR_CAN_PORT);
 
 	//Sensors
 	DriveGyro_ = new RelativeGyro((int)Constants_->GYRO_DRIVE);
@@ -34,7 +35,7 @@ RobotName::RobotName()
 
 	//Subsystems
 	Drive_ = new Drive(LeftDriveMotorA_, LeftDriveMotorB_, RightDriveMotorA_, RightDriveMotorB_, DriveGyro_, LeftDriveEncoder_, RightDriveEncoder_);
-	Intake_ = new Intake(LeftIntakeMotor_, RightIntakeMotor_, LeftIntakeArm_, RightIntakeArm_);
+	Intake_ = new Intake(LeftIntakeMotor_, RightIntakeMotor_, LeftIntakeArm_, RightIntakeArm_, Compressor_);
 
 
 }

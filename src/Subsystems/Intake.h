@@ -18,7 +18,7 @@ public:
 	 * Constructor
 	 * All electronics are passed into the Intake Subsystem for use.
 	 */
-	Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor, DoubleSolenoid* leftIntakeArm, DoubleSolenoid* rightIntakeArm);
+	Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor, DoubleSolenoid* leftIntakeArm, DoubleSolenoid* rightIntakeArm, Compressor* compressor);
 
 	/**
 	 * Function to directly interface with the motors.
@@ -39,9 +39,13 @@ public:
 	void SetIntakeMotorsRotate(float intakePower);
 
 	/**
-	 * A boolean = 1 will close arm.  0 will open.
+	 * If pressure in system is too low, command will not function.
+	 * bool off - If true, solenoids turned off.  (Does that mean they go limp?)  This overrides left/right
+	 * bool left/right - If true, Arm switches in.  If false, Arm goes out.
+	 *
 	 */
-	void SetIntakeArm(bool left, bool right);
+	void SetIntakeArm(bool left, bool right, bool off);
+
 private:
 
 	Constants* Constants_;
@@ -51,6 +55,7 @@ private:
 
 	DoubleSolenoid* LeftIntakeArm_;
 	DoubleSolenoid* RightIntakeArm_;
+	Compressor* Compressor_;
 
 };
 

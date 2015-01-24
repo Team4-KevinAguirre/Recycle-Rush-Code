@@ -1,6 +1,6 @@
 #include "Intake.h"
 
-Intake::Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor, DoubleSolenoid* leftIntakeArm, DoubleSolenoid* rightIntakeArm){
+Intake::Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor, DoubleSolenoid* leftIntakeArm, DoubleSolenoid* rightIntakeArm, Compressor* compressor){
 
 	Constants_ = Constants::GetInstance();
 
@@ -11,6 +11,7 @@ Intake::Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor, DoubleSole
 	//Pneumatics
 	LeftIntakeArm_ = leftIntakeArm;
 	RightIntakeArm_ = rightIntakeArm;
+	Compressor_ = compressor;
 
 }
 
@@ -28,7 +29,15 @@ void Intake::SetIntakeMotorsRotate(float intakePower){
 	SetIntakeMotors(-intakePower, intakePower);
 }
 
-void Intake::SetIntakeArm(bool left, bool right) {
+void Intake::SetIntakeArm(bool left, bool right, bool off) {
+	if(Compressor_->GetPressureSwitchValue())//If pressure is low
+		return;
+	if(off)
+	{
+		LeftIntakeArm_->Set(LeftIntakeArm_->kOff);
+		RightIntakeArm_->Set(RightIntakeArm_->kOff);
+		return;
+	}
 	if(left)
 		LeftIntakeArm_->Set(LeftIntakeArm_->kForward);
 	else
@@ -37,4 +46,5 @@ void Intake::SetIntakeArm(bool left, bool right) {
 		RightIntakeArm_->Set(RightIntakeArm_->kForward);
 	else
 		RightIntakeArm_->Set(RightIntakeArm_->kReverse);
+	return;
 }
