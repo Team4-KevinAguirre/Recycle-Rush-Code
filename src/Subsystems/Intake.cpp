@@ -27,3 +27,14 @@ void Intake::SetIntakeMotorsLinear(float intakePower){
 void Intake::SetIntakeMotorsRotate(float intakePower){
 	SetIntakeMotors(-intakePower, intakePower);
 }
+
+void Intake::SetIntakeArm(bool left, bool right) {
+	if(left)
+		LeftIntakeArm_->Set(LeftIntakeArm_->kForward);
+	else
+		LeftIntakeArm_->Set(LeftIntakeArm_->kReverse);
+	if(right)
+		RightIntakeArm_->Set(RightIntakeArm_->kForward);
+	else
+		RightIntakeArm_->Set(RightIntakeArm_->kReverse);
+}

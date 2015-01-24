@@ -37,6 +37,11 @@ public:
 	 * Convenience function to rotate objects.
 	 */
 	void SetIntakeMotorsRotate(float intakePower);
+
+	/**
+	 * A boolean = 1 will close arm.  0 will open.
+	 */
+	void SetIntakeArm(bool left, bool right);
 private:
 
 	Constants* Constants_;
