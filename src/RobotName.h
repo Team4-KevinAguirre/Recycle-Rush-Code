@@ -71,7 +71,6 @@ private:
 	//Subsystems
 	Drive* Drive_;
 	Intake* Intake_;
-	Pneumatics* Pneumatics_;
 };
 
 START_ROBOT_CLASS(RobotName);
