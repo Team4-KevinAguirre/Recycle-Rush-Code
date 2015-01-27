@@ -6,12 +6,8 @@
 #define __ROBOT_NAME_H__
 
 //#include <hostLib.h>
-#include "Subsystems/Drive.h"
-#include "Subsystems/Conveyor.h"
 #include "Subsystems/Intake.h"
 #include <WPILib.h>
-#include "Util/RelativeGyro.h"
-
 #include "Config/Constants.h"
 #include "PhoenixControlBoard.h"
 
@@ -40,13 +36,6 @@ private:
 	//Constants
 	Constants* Constants_;
 
-
-	//Motors
-	VictorSP* LeftDriveMotorA_;
-	VictorSP* LeftDriveMotorB_;
-	VictorSP* RightDriveMotorA_;
-	VictorSP* RightDriveMotorB_;
-
 	VictorSP* LeftIntakeMotor_;
 	VictorSP* RightIntakeMotor_;
 
@@ -57,9 +46,6 @@ private:
 	Compressor* Compressor_;
 
 	//Sensors
-	RelativeGyro* DriveGyro_;
-	Encoder* LeftDriveEncoder_;
-	Encoder* RightDriveEncoder_;
 
 	//Joysticks
 	Joystick* DriverJoystick_;
@@ -69,7 +55,6 @@ private:
 	PhoenixControlBoard* ControlBoard_;
 
 	//Subsystems
-	Drive* Drive_;
 	Intake* Intake_;
 };
 

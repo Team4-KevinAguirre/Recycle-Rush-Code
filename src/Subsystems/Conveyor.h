@@ -4,7 +4,6 @@
 #define CONVEYOR_H_
 
 #include "WPILib.h"
-#include "../PhoenixLib/PhoenixLib.h"
 #include "../Config/Constants.h"
 
 
