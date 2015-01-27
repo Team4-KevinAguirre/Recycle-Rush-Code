@@ -7,6 +7,11 @@ RobotName::RobotName()
 
 	//Motors
 
+	LeftDriveMotorA_ = new VictorSP((int)Constants_->PWM_LEFT_DRIVE_A);
+	LeftDriveMotorB_ = new VictorSP((int)Constants_->PWM_LEFT_DRIVE_B);
+	RightDriveMotorA_ = new VictorSP((int)Constants_->PWM_RIGHT_DRIVE_A);
+	RightDriveMotorB_ = new VictorSP((int)Constants_->PWM_RIGHT_DRIVE_B);
+
 	LeftIntakeMotor_ = new VictorSP((int)Constants_->PWM_LEFT_INTAKE);
 	RightIntakeMotor_ = new VictorSP((int)Constants_->PWM_RIGHT_INTAKE);
 
@@ -17,6 +22,9 @@ RobotName::RobotName()
 	Compressor_->Start(); //This will keep the compressor fully charged at all points in time.
 
 	//Sensors
+	DriveGyro_ = new RelativeGyro((int)Constants_->GYRO_DRIVE);
+	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_LEFT_DRIVE_A, (int)Constants_->ENCODER_LEFT_DRIVE_B);
+	RightDriveEncoder_ = new Encoder((int)Constants_->ENCODER_RIGHT_DRIVE_A, (int)Constants_->ENCODER_RIGHT_DRIVE_B);
 
 	//Joysticks
 	DriverJoystick_ = new Joystick((int)Constants_->JOY_PORT_DRIVE);
@@ -26,6 +34,7 @@ RobotName::RobotName()
 	ControlBoard_ = new PhoenixControlBoard(DriverJoystick_, OperatorJoystick_);
 
 	//Subsystems
+	Drive_ = new Drive(LeftDriveMotorA_, LeftDriveMotorB_, RightDriveMotorA_, RightDriveMotorB_, DriveGyro_, LeftDriveEncoder_, RightDriveEncoder_);
 	Intake_ = new Intake(LeftIntakeMotor_, RightIntakeMotor_, LeftIntakeArm_, RightIntakeArm_, Compressor_);
 
 
@@ -79,7 +88,20 @@ void RobotName::AutonomousPeriodic()
 }
 void RobotName::TeleopPeriodic()
 {
-//	Intake_->SetIntakeMotorsLinear(ControlBoard_->GetOperatorAxis(Constants_->JOY_AXIS_LJ_Y));
-//
-//	Intake_->SetIntakeMotorsRotate(ControlBoard_->GetOperatorAxis(Constants_->JOY_AXIS_RJ_X));
+	//Drive Commands
+	Drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y),ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_X),ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
+	Drive_->SetPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y));
+	Drive_->rotateDrive(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_L_TRIGGER)); ////TODO: Just this doesn't support using both triggers.  Make sure that L_TRIGGER works in 2015 Mapping, and if so, subtract L-R.
+	Drive_->rotateAbsoluteDrive(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_R_TRIGGER)); //TODO: Just this doesn't support using both triggers.  Make sure that L_TRIGGER works in 2015 Mapping, and if so, subtract L-R.
+	Drive_->GetLeftEncoderDistance(); //Need to use smartdashboard.
+	Drive_->GetRightEncoderDistance(); //"       "
+	Drive_->GetGyroAngle(); //Use Smartdashboard
+	Drive_->ResetGyro(); //Use SmartDashboard
+	Drive_->resetAbsoluteGyro(); //Use SmartDashboard
+	Drive_->ResetEncoders(); //Use SmartDashboard
+
+	Intake_->SetIntakeMotors(ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_X),ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_B));
+	Intake_->SetIntakeMotorsLinear(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y));
+	Intake_->SetIntakeMotorsRotate(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_X));
+	Intake_->SetIntakeArm(ControlBoard_->GetDrivePOV(Constants_->JOY_DPAD_LEFT),ControlBoard_->GetDrivePOV(Constants_->JOY_DPAD_RIGHT),ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
 }

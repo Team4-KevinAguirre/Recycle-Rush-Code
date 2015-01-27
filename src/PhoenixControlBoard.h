@@ -16,13 +16,13 @@ public:
 
 	float GetDriveAxis(int axis);
 	bool GetDriveButton(int button);
-	float GetDrivePOV();
+	float GetDrivePOV(int button);
 	//Returns the degree starting at up and going clockwise.
 	//TODO: Do we need to fix s.t. zero'd somewhere else?
 
 	float GetOperatorAxis(int axis);
 	bool GetOperatorButton(int button);
-	float GetOperatorPOV();
+	float GetOperatorPOV(int button);
 	//Returns the degree starting at up and going clockwise.
 	//TODO: Do we need to fix s.t. zero'd somewhere else?
 private:

@@ -23,8 +23,8 @@ bool PhoenixControlBoard::GetDriveButton(int button){
 	return (DriveJoystick_->GetRawButton(button));
 }
 
-float PhoenixControlBoard::GetDrivePOV(){
-	return ((DriveJoystick_->GetPOV())*45);
+float PhoenixControlBoard::GetDrivePOV(int button){
+	return (DriveJoystick_->GetPOV(button));
 }
 
 float PhoenixControlBoard::GetOperatorAxis(int axis){
@@ -38,6 +38,6 @@ bool PhoenixControlBoard::GetOperatorButton(int button){
 	return (OperatorJoystick_->GetRawButton(button));
 }
 
-float PhoenixControlBoard::GetOperatorPOV(){
-	return ((OperatorJoystick_->GetPOV())*45);
+float PhoenixControlBoard::GetOperatorPOV(int button){
+	return (OperatorJoystick_->GetPOV(button));
 	}
