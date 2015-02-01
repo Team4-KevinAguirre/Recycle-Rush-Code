@@ -49,8 +49,8 @@ void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 		turn *= sensitivity;
 		turn = -turn;
 
-		float left_power = speed - turn;
-		float right_power = speed + turn;
+		float left_power = speed + turn;
+		float right_power = speed - turn;
 
 		SmartDashboard::PutNumber("Drive Left",left_power);
 		SmartDashboard::PutNumber("Drive Right", right_power);
@@ -104,6 +104,9 @@ void Drive::ResetEncoders() {
 }
 
 void Drive::SetPower(double leftPower, double rightPower){
+	//SmartDashboard::PutNumber("left", leftPower);
+	//SmartDashboard::PutNumber("Right", rightPower);
+
 	LeftDriveMotorA_->Set(PwmLimit(-leftPower));
 	LeftDriveMotorB_->Set(PwmLimit(-leftPower));
 	RightDriveMotorA_->Set(PwmLimit(rightPower));

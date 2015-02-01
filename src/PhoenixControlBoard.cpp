@@ -12,9 +12,7 @@ PhoenixControlBoard::PhoenixControlBoard(Joystick* DriveJoystick, Joystick* Oper
 
 
 float PhoenixControlBoard::GetDriveAxis(int axis){
-	if(axis == (int)Constants_->JOY_AXIS_LJ_Y || axis == (int)Constants_->JOY_AXIS_RJ_Y)
-		return(-DriveJoystick_->GetRawAxis(axis));
-	else
+
 	return (DriveJoystick_->GetRawAxis(axis));
 }
 

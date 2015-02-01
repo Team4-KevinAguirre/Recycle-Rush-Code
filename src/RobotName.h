@@ -67,6 +67,8 @@ private:
 	//Subsystems
 	Drive* Drive_;
 	Intake* Intake_;
+
+	bool isTankDrive;
 };
 
 START_ROBOT_CLASS(RobotName);
