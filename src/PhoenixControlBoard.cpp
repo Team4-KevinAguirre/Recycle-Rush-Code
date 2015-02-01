@@ -12,8 +12,26 @@ PhoenixControlBoard::PhoenixControlBoard(Joystick* DriveJoystick, Joystick* Oper
 
 
 float PhoenixControlBoard::GetDriveAxis(int axis){
+	return DriveJoystick_->GetRawAxis(axis);
+}
 
-	return (DriveJoystick_->GetRawAxis(axis));
+float PhoenixControlBoard::GetDriveAxisFilterTopBottomTrim(int axis, double botTrim, double topTrim){
+	float rawInput = DriveJoystick_->GetRawAxis(axis);
+
+	if(botTrim == 1 || topTrim == 1 || (1-botTrim-topTrim) == 0 || (botTrim + topTrim) >= 1)
+		return rawInput;
+	else
+		return(1/(1-botTrim-topTrim)*(rawInput - botTrim));
+
+}
+
+float PhoenixControlBoard::GetDriveAxisFilterCubic(int axis, double a) {
+	float rawInput = DriveJoystick_->GetRawAxis(axis);
+	if(a < 0 || a > 1)
+		return rawInput;
+
+	float rawInputCubed = rawInput * rawInput * rawInput;
+	return a*rawInputCubed + (1-a)*rawInput;
 }
 
 bool PhoenixControlBoard::GetDriveButton(int button){
@@ -26,10 +44,26 @@ float PhoenixControlBoard::GetDrivePOV(int button){
 }
 
 float PhoenixControlBoard::GetOperatorAxis(int axis){
-	if(axis == (int)Constants_->JOY_AXIS_LJ_Y || axis == (int)Constants_->JOY_AXIS_RJ_Y)
-		return(-OperatorJoystick_->GetRawAxis(axis));
-	else
 	return (OperatorJoystick_->GetRawAxis(axis));
+}
+
+float PhoenixControlBoard::GetOperatorAxisFilterTopBottomTrim(int axis, double botTrim, double topTrim){
+	float rawInput = OperatorJoystick_->GetRawAxis(axis);
+
+	if(botTrim == 1 || topTrim == 1 || (1-botTrim-topTrim) == 0 || (botTrim + topTrim) >= 1)
+		return rawInput;
+	else
+		return(1/(1-botTrim-topTrim)*(rawInput - botTrim));
+
+}
+
+float PhoenixControlBoard::GetOperatorAxisFilterCubic(int axis, double a) {
+	float rawInput = OperatorJoystick_->GetRawAxis(axis);
+	if(a < 0 || a > 1)
+		return rawInput;
+
+	float rawInputCubed = rawInput * rawInput * rawInput;
+	return a*rawInputCubed + (1-a)*rawInput;
 }
 
 bool PhoenixControlBoard::GetOperatorButton(int button){
