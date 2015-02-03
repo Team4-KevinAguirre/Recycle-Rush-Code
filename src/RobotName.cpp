@@ -98,7 +98,7 @@ void RobotName::TeleopPeriodic()
 			isTankDrive = true;
 	}
 	if(isTankDrive)
-		Drive_->SetPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y));
+		Drive_->SetLinearPower(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y), ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_Y));
 	else
 		Drive_->DriveSpeedTurn(ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_LJ_Y),ControlBoard_->GetDriveAxis(Constants_->JOY_AXIS_RJ_X),ControlBoard_->GetDriveButton(Constants_->JOY_BUTTON_RB));
 

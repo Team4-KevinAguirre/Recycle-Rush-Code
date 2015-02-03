@@ -62,6 +62,8 @@ public:
 	/**
 	 * This function allows user to trim percentage from the bottom and top ranges of the axis.  The output is then
 	 * linear between these two "modified" bounds.
+	 * Not working yet.
+	 * Ex| To trim the top 5% and bottom 5%, botTrim = 0.05, topTrim = 0.05
 	 * TODO: @ Return | ___________.
 	 */
 	float GetOperatorAxisFilterTopBottomTrim(int axis, double botTrim, double topTrim);

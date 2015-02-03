@@ -78,7 +78,16 @@ public:
 	 * Interface used to set the speeds of the motors.  This is created for readability and to obscure minus signs.
 	 * A positive value is forward while a negative Value is backwards.
 	 */
-	void SetPower(double leftPower, double rightPower);
+	void SetLinearPower(double leftPower, double rightPower);
+
+	/**
+	 * Inspiration from 1538.  This function will adjust the heading to drive at a certain angle.  Applies PID
+	 * on the turning.
+	 * Returns when error is significantly low.
+	 */
+	bool DriveWithHeading(double heading, double speed);
+
+	bool DriveDistanceWithHeading(double heading, double distance);
 
 private:
 
@@ -97,6 +106,9 @@ private:
 
 
 	Pid* TurnPid_;
+
+	double m_PreviousGyroError;
+	double m_PreviousDriveError;
 
 };
 #endif

@@ -17,6 +17,27 @@ inline double PwmLimit(double pwm) {
   return pwm >= 1.0 ? 1.0 : pwm <= -1.0 ? -1.0 : pwm;
 }
 
+double LimitMix(double value, double maxValue)
+{
+	double limited_value = 0;
+
+	if(value < -maxValue)
+	{
+		limited_value = -maxValue;
+	}
+	else if(value > maxValue)
+	{
+		limited_value = maxValue;
+	}
+	else
+	{
+		limited_value = value;
+	}
+
+	return limited_value;
+}
+
+
 /**
  * Implements a deadband on a joystick
  * @param val the joystick value

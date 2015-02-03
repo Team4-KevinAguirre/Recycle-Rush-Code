@@ -21,6 +21,9 @@ Drive::Drive(VictorSP* leftDriveMotorA, VictorSP* leftDriveMotorB, VictorSP* rig
 
 	TurnPid_ = new Pid(&Constants_->PID_DRIVE_TURN_KD,&Constants_->PID_DRIVE_TURN_KI, &Constants_->PID_DRIVE_TURN_KD);
 
+	m_PreviousGyroError = 0;
+	m_PreviousDriveError = 0;
+
 }
 
 void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
@@ -55,7 +58,7 @@ void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 		SmartDashboard::PutNumber("Drive Left",left_power);
 		SmartDashboard::PutNumber("Drive Right", right_power);
 
-		SetPower(left_power, right_power);
+		SetLinearPower(left_power, right_power);
 
 }
 
@@ -64,7 +67,7 @@ void Drive::rotateDrive(float turnIncrement){
 	float sens = .01;
 	float newLeft = ((LeftDriveMotorA_->Get())+turnIncrement*sens);
 	float newRight = ((RightDriveMotorA_->Get())+turnIncrement*sens);
-	SetPower(newLeft,newRight);
+	SetLinearPower(newLeft,newRight);
 }
 
 void Drive::rotateAbsoluteDrive(float rotationAngle){
@@ -72,7 +75,7 @@ void Drive::rotateAbsoluteDrive(float rotationAngle){
 	float setpointAngle = rotationAngle;
 
 	double power = TurnPid_->Update(setpointAngle, currAngle);
-	SetPower(-power, power);
+	SetLinearPower(-power, power);
 }
 
 double Drive::GetLeftEncoderDistance() {
@@ -103,7 +106,7 @@ void Drive::ResetEncoders() {
 	RightDriveEncoder_->Reset();
 }
 
-void Drive::SetPower(double leftPower, double rightPower){
+void Drive::SetLinearPower(double leftPower, double rightPower){
 	//SmartDashboard::PutNumber("left", leftPower);
 	//SmartDashboard::PutNumber("Right", rightPower);
 
@@ -113,3 +116,39 @@ void Drive::SetPower(double leftPower, double rightPower){
 	RightDriveMotorB_->Set(PwmLimit(rightPower));
 
 }
+
+bool Drive::DriveWithHeading(double heading, double speed) {
+	double PID_P = Constants_->PID_DRIVE_TURN_KD;
+	double PID_D = Constants_->PID_DRIVE_TURN_KD;
+	double error = heading - GetGyroAngle();
+	double dError = error - m_PreviousGyroError;
+	double output = PID_P*error + PID_D*dError;
+
+	SetLinearPower(speed - output, speed + output);
+
+	m_PreviousGyroError = error;
+
+	return (fabs(error) < 4);
+}
+
+bool Drive::DriveDistanceWithHeading(double heading, double distance) {
+
+	double PID_P = Constants_->PID_DRIVE_SPEED_KP;
+	double PID_D = Constants_->PID_DRIVE_SPEED_KD;
+	double error = distance - LeftDriveEncoder_->GetDistance();
+	double dError = error - m_PreviousDriveError;
+	double output = PID_P * error + PID_D * dError;
+
+	bool headingResult = DriveWithHeading(heading, LimitMix(output,Constants_->PID_DRIVE_MAX_SPEED));
+
+	m_PreviousDriveError = error;
+
+	return(fabs(error) < 4);
+
+}
+
+
+
+
+
+
