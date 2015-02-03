@@ -62,8 +62,7 @@ public:
 	/**
 	 * This function allows user to trim percentage from the bottom and top ranges of the axis.  The output is then
 	 * linear between these two "modified" bounds.
-	 * Not working yet.
-	 * Ex| To trim the top 5% and bottom 5%, botTrim = 0.05, topTrim = 0.05
+	 * Ex | To trim the top 5% and bottom 5%, botTrim = 0.05, topTrim = 0.05
 	 * TODO: @ Return | ___________.
 	 */
 	float GetOperatorAxisFilterTopBottomTrim(int axis, double botTrim, double topTrim);
@@ -71,10 +70,11 @@ public:
 	/**
 	 * Cubic Filter to change sensitivity at all Joystick Input Ranges.  The tuning parameter 'a', should be set between
 	 * 0 and 1.  This function will be less sensitive to lower ranges, but is more sensitive at higher ranges.
+	 * 'a' = 1 is linear profile, 'a' = 0 is fully cubic.
+	 * As 'a' decreases, the sensitivity at low speeds is ramped down, while sensitivity at high speeds is increased.
 	 *  Credits to Ether:
-	 *  http://www.chiefdelphi.com/media/papers/2421?	 *
+	 *  http://www.chiefdelphi.com/media/papers/2421?
 	 */
-
 	float GetOperatorAxisFilterCubic(int axis, double a);
 
 	/**

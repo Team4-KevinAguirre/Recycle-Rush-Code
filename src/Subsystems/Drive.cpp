@@ -19,7 +19,7 @@ Drive::Drive(VictorSP* leftDriveMotorA, VictorSP* leftDriveMotorB, VictorSP* rig
 	RightDriveEncoder_ = rightDriveEncoder;
 
 
-	TurnPid_ = new Pid(&Constants_->PID_DRIVE_TURN_KD,&Constants_->PID_DRIVE_TURN_KI, &Constants_->PID_DRIVE_TURN_KD);
+//	TurnPid_ = new Pid(&Constants_->PID_DRIVE_TURN_KD,&Constants_->PID_DRIVE_TURN_KI, &Constants_->PID_DRIVE_TURN_KD);
 
 	m_PreviousGyroError = 0;
 	m_PreviousDriveError = 0;
@@ -62,31 +62,31 @@ void Drive::DriveSpeedTurn(float speed, float turn, bool quickTurn){
 
 }
 
-void Drive::rotateDrive(float turnIncrement){
-	//TODO: Remove newLeft/newRight because memory waste.  Put in here for ease of reading.
-	float sens = .01;
-	float newLeft = ((LeftDriveMotorA_->Get())+turnIncrement*sens);
-	float newRight = ((RightDriveMotorA_->Get())+turnIncrement*sens);
-	SetLinearPower(newLeft,newRight);
-}
+//void Drive::rotateDrive(float turnIncrement){
+//	//TODO: Remove newLeft/newRight because memory waste.  Put in here for ease of reading.
+//	float sens = .01;
+//	float newLeft = ((LeftDriveMotorA_->Get())+turnIncrement*sens);
+//	float newRight = ((RightDriveMotorA_->Get())+turnIncrement*sens);
+//	SetLinearPower(newLeft,newRight);
+//}
 
-void Drive::rotateAbsoluteDrive(float rotationAngle){
-	float currAngle = DriveGyro_->GetAngle();
-	float setpointAngle = rotationAngle;
-
-	double power = TurnPid_->Update(setpointAngle, currAngle);
-	SetLinearPower(-power, power);
-}
+//void Drive::rotateAbsoluteDrive(float rotationAngle){
+//	float currAngle = DriveGyro_->GetAngle();
+//	float setpointAngle = rotationAngle;
+//
+//	double power = TurnPid_->Update(setpointAngle, currAngle);
+//	SetLinearPower(-power, power);
+//}
 
 double Drive::GetLeftEncoderDistance() {
 	//Get() returns encoder clicks
 	//TODO: 256 is encoder ticks per rotation
 	//6.0*pi is the circumference of the wheel
-	return(-LeftDriveEncoder_->Get()/256 *6.0 *3.14159265);
+	return(-LeftDriveEncoder_->Get()/128 *6.0 *3.14159265);
 }
 
 double Drive::GetRightEncoderDistance() {
-	return(RightDriveEncoder_->Get()/256 *6.0 *3.14159265);
+	return(RightDriveEncoder_->Get()/128 *6.0 *3.14159265);
 }
 
 double Drive::GetGyroAngle() {
@@ -117,38 +117,35 @@ void Drive::SetLinearPower(double leftPower, double rightPower){
 
 }
 
-bool Drive::DriveWithHeading(double heading, double speed) {
-	double PID_P = Constants_->PID_DRIVE_TURN_KD;
-	double PID_D = Constants_->PID_DRIVE_TURN_KD;
-	double error = heading - GetGyroAngle();
-	double dError = error - m_PreviousGyroError;
-	double output = PID_P*error + PID_D*dError;
+//bool Drive::DriveWithHeading(double heading, double speed) {
+//	double PID_P = Constants_->PID_DRIVE_TURN_KD;
+//	double PID_D = Constants_->PID_DRIVE_TURN_KD;
+//	double error = heading - GetGyroAngle();
+//	double dError = error - m_PreviousGyroError;
+//	double output = PID_P*error + PID_D*dError;
+//
+//	SetLinearPower(speed - output, speed + output);
+//
+//	m_PreviousGyroError = error;
+//
+//	return (fabs(error) < 4);
+//}
 
-	SetLinearPower(speed - output, speed + output);
-
-	m_PreviousGyroError = error;
-
-	return (fabs(error) < 4);
-}
-
-bool Drive::DriveDistanceWithHeading(double heading, double distance) {
-
-	double PID_P = Constants_->PID_DRIVE_SPEED_KP;
-	double PID_D = Constants_->PID_DRIVE_SPEED_KD;
-	double error = distance - LeftDriveEncoder_->GetDistance();
-	double dError = error - m_PreviousDriveError;
-	double output = PID_P * error + PID_D * dError;
-
-	bool headingResult = DriveWithHeading(heading, LimitMix(output,Constants_->PID_DRIVE_MAX_SPEED));
-
-	m_PreviousDriveError = error;
-
-	return(fabs(error) < 4);
-
-}
-
-
-
+//bool Drive::DriveDistanceWithHeading(double heading, double distance) {
+//
+//	double PID_P = Constants_->PID_DRIVE_SPEED_KP;
+//	double PID_D = Constants_->PID_DRIVE_SPEED_KD;
+//	double error = distance - LeftDriveEncoder_->GetDistance();
+//	double dError = error - m_PreviousDriveError;
+//	double output = PID_P * error + PID_D * dError;
+//
+//	bool headingResult = DriveWithHeading(heading, LimitMix(output,Constants_->PID_DRIVE_MAX_SPEED));
+//
+//	m_PreviousDriveError = error;
+//
+//	return(fabs(error) < 4);
+//
+//}
 
 
 

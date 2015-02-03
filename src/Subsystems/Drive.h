@@ -31,13 +31,13 @@ public:
 	 * Used with "analog" joystick inputs (triggers, etc...) to rotate robot finely.
 	 * TODO: Create a global rotation sensitivity constant.
 	 */
-	void rotateDrive(float turnIncrement);
+//	void rotateDrive(float turnIncrement);
 
 	/**
 	 * Given an angle, we can use gyro to rotate to a field-centric angle.
 	 * TODO: Do not know if driver wants this, but needs gyro.
 	 */
-	void rotateAbsoluteDrive(float angle);
+//	void rotateAbsoluteDrive(float angle);
 
 	/**
 	 * Gets the distance traveled by the left side of the Robot.
@@ -85,9 +85,9 @@ public:
 	 * on the turning.
 	 * Returns when error is significantly low.
 	 */
-	bool DriveWithHeading(double heading, double speed);
+//	bool DriveWithHeading(double heading, double speed);
 
-	bool DriveDistanceWithHeading(double heading, double distance);
+//	bool DriveDistanceWithHeading(double heading, double distance);
 
 private:
 
@@ -105,7 +105,7 @@ private:
 	Encoder* RightDriveEncoder_;
 
 
-	Pid* TurnPid_;
+//	Pid* TurnPid_;
 
 	double m_PreviousGyroError;
 	double m_PreviousDriveError;

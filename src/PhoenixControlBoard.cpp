@@ -16,13 +16,18 @@ float PhoenixControlBoard::GetDriveAxis(int axis){
 }
 
 float PhoenixControlBoard::GetDriveAxisFilterTopBottomTrim(int axis, double botTrim, double topTrim){
-//	float rawInput = DriveJoystick_->GetRawAxis(axis);
-//
-//	if(botTrim == 1 || topTrim == 1 || (1-botTrim-topTrim) == 0 || (botTrim + topTrim) >= 1)
-//		return rawInput;
-//	else
-//		return(1/(1-botTrim-topTrim)*(rawInput - botTrim));
-return (DriveJoystick_->GetRawAxis(axis));
+	float rawInput = DriveJoystick_->GetRawAxis(axis);
+	double bot = botTrim;
+	double top = 1- topTrim;
+
+	if(bot >= 1 || top >= 1 || (bot+top) >= 1)
+		return rawInput;
+	else
+		if (rawInput >=0)
+			return 1/(top-bot) * (rawInput - bot);
+		else
+			return 1/(top-bot) * (rawInput + bot);
+	return rawInput;
 }
 
 float PhoenixControlBoard::GetDriveAxisFilterCubic(int axis, double a) {
