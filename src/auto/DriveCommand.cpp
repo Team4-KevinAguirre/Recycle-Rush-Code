@@ -1,10 +1,24 @@
 #include "auto/DriveCommand.h"
 
-#include "Subsystems/Drive.h"
-#include "Config/Constants.h"
+DriveCommand::DriveCommand(Drive* drive, double distance, double angle, double timeout) {
 
-DriveCommand::DriveCommand(Drive* drive, double distance, double angle, double timeout, double maxSpeed, double maxAcceleration, double maxAlpha, double maxOmega) {
-	drive_ = drive;
+	SetTimeout(timeout);
+	Drive_ = drive;
+	distanceGoal_ = distance;
+	angleGoal_ = angle;
 
 	Constants* constants = Constants::GetInstance();
+}
+
+void DriveCommand::Initialize() {
+
+	Drive_->ResetEncoders();
+	Drive_->ResetGyro();
+
+}
+
+bool DriveCommand::Run() {
+
+	return(Drive_->DriveDistanceWithHeading(distanceGoal_,angleGoal_));
+
 }

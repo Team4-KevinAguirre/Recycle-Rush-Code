@@ -27,6 +27,8 @@ class Pid {
    */
   double Update(double goal, double currentValue);
 
+  double lastError_;
+
  private:
   // PID constants
   double* kP_;
@@ -37,7 +39,7 @@ class Pid {
   double errorSum_;
 
   // Last error value used to find error difference for derivative term
-  double lastError_;
+
 };
 
 #endif  // SUBSYSTEMS_PID_H_

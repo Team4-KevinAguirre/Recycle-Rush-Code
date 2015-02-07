@@ -89,6 +89,14 @@ public:
 
 //	bool DriveDistanceWithHeading(double heading, double distance);
 
+	bool DriveDistanceWithHeading (double heading, double distance);
+
+	bool DriveWithHeading(double heading, double speed);
+
+	void ResetDistance();
+
+	void CheesyDrive(double throttle, double wheel, bool quickTurn);
+
 private:
 
 	Constants* Constants_;
@@ -105,10 +113,15 @@ private:
 	Encoder* RightDriveEncoder_;
 
 
-//	Pid* TurnPid_;
+	Pid* DrivePid_;
+	Pid* TurnPid_;
 
 	double m_PreviousGyroError;
 	double m_PreviousDriveError;
+	double m_PrevDistance;
+
+	double old_wheel_;
+	double quickStopAccumulator_;
 
 };
 #endif

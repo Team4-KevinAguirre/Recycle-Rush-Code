@@ -17,8 +17,7 @@ inline double PwmLimit(double pwm) {
   return pwm >= 1.0 ? 1.0 : pwm <= -1.0 ? -1.0 : pwm;
 }
 
-double LimitMix(double value, double maxValue)
-{
+inline double LimitMix(double value, double maxValue) {
 	double limited_value = 0;
 
 	if(value < -maxValue)
