@@ -1,0 +1,29 @@
+//	SmartDashboard::PutBoolean("Driver_Start",0);
+//	SmartDashboard::PutBoolean("Driver_Back",0);
+//	SmartDashboard::PutBoolean("Driver_A",0);
+//	SmartDashboard::PutBoolean("Driver_B",0);
+//	SmartDashboard::PutBoolean("Driver_X",0);
+//	SmartDashboard::PutBoolean("Driver_Y",0);
+//	SmartDashboard::PutBoolean("Driver_LB",0);
+//	SmartDashboard::PutBoolean("Driver_RB",0);
+//	SmartDashboard::PutNumber("Driver_LT",1);
+//	SmartDashboard::PutNumber("Driver_RT",1);
+//	SmartDashboard::PutNumber("Driver_LStick",1);
+//	SmartDashboard::PutNumber("Driver_RStick",1);
+//
+//	SmartDashboard::PutBoolean("Operator_Start",0);
+//	SmartDashboard::PutBoolean("Operator_Back",0);
+//	SmartDashboard::PutBoolean("Operator_A",0);
+//	SmartDashboard::PutBoolean("Operator_B",0);
+//	SmartDashboard::PutBoolean("Operator_X",0);
+//	SmartDashboard::PutBoolean("Operator_Y",0);
+//	SmartDashboard::PutBoolean("Operator_LB",0);
+//	SmartDashboard::PutBoolean("Operator_RB",0);
+//	SmartDashboard::PutNumber("Operator_LT",1);
+//	SmartDashboard::PutNumber("Operator_RT",1);
+//	SmartDashboard::PutNumber("Operator_LStick",1);
+//	SmartDashboard::PutNumber("Operator_RStick",1);
+//
+//	SmartDashboard::GetNumber("ELEVATOR_P");
+//	SmartDashboard::GetNumber("ELEVATOR_I");
+//	SmartDashboard::GetNumber("ELEVATOR_D");

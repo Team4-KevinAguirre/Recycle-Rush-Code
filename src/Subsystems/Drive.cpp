@@ -15,10 +15,10 @@ Drive::Drive(VictorSP* leftDriveMotorA, VictorSP* leftDriveMotorB, VictorSP* rig
 
 	//Sensors
 	DriveGyro_ = driveGyro;
+	DriveGyro_->ResetAbsolute();
 	LeftDriveEncoder_ = leftDriveEncoder;
-	LeftDriveEncoder_->SetDistancePerPulse(1.0/128 *6.0 *3.14159265);
 	RightDriveEncoder_ = rightDriveEncoder;
-	LeftDriveEncoder_->SetDistancePerPulse(-1.0/128 *6.0 *3.14159265);
+
 
 	DrivePid_ = new Pid(&Constants_->PID_DRIVE_SPEED_KP, &Constants_->PID_DRIVE_SPEED_KI, &Constants_->PID_DRIVE_SPEED_KD);
 	TurnPid_ = new Pid(&Constants_->PID_DRIVE_TURN_KP,&Constants_->PID_DRIVE_TURN_KI, &Constants_->PID_DRIVE_TURN_KD);
@@ -100,7 +100,11 @@ double Drive::GetRightEncoderDistance() {
 }
 
 double Drive::GetGyroAngle() {
-	return DriveGyro_->GetAngle();
+	double angleTurn = DriveGyro_->GetAngle();
+	SmartDashboard::PutNumber("Gyro Angle", angleTurn);
+	return angleTurn;
+
+
 }
 
 void Drive::ResetGyro(){
@@ -117,8 +121,8 @@ void Drive::ResetEncoders() {
 }
 
 void Drive::SetLinearPower(double leftPower, double rightPower){
-	SmartDashboard::PutNumber("Drive_Motor_Left", leftPower);
-	SmartDashboard::PutNumber("Drive_Motor_Right", rightPower);
+	SmartDashboard::PutNumber("Drive_Motor_Left_Power", leftPower);
+	SmartDashboard::PutNumber("Drive_Motor_Right_Power", rightPower);
 
 	LeftDriveMotorA_->Set(PwmLimit(-leftPower));
 	LeftDriveMotorB_->Set(PwmLimit(-leftPower));
@@ -254,15 +258,35 @@ bool Drive::DriveDistanceWithHeading (double heading, double distance) {
 	return (fabs(DrivePid_->lastError_) < 4 && headingResult);
 }
 
-bool Drive::DriveWithHeading(double heading, double speed) {
+//bool Drive::DriveWithHeading(double heading, double speed) {
+//
+//
+//	double AngularSpeed = TurnPid_->Update(heading, GetGyroAngle());
+//
+//	SetLinearPower(speed - AngularSpeed, speed + AngularSpeed);
+//
+//	return(fabs(TurnPid_->lastError_) < 1);
+//
+//}
 
+bool Drive::DriveWithHeading(double heading, double speed)
+{
+	speed *= -1;
+	double PID_P = 0.1;
+	double PID_D = 0.2;
+	double error = heading - DriveGyro_->GetAngle();
+	double dError = error - m_PreviousGyroError;
+	double output = PID_P*error + PID_D*dError;
 
-	double AngularSpeed = TurnPid_->Update(heading, GetGyroAngle());
+	SmartDashboard::PutNumber("Heading Error", error);
+	SmartDashboard::PutNumber("Heading D Error", dError);
+	SmartDashboard::PutNumber("Heading Output", output);
 
-	SetLinearPower(speed - AngularSpeed, speed + AngularSpeed);
+	//SetLinearPower(speed-output, speed+output);
 
-	return(fabs(TurnPid_->lastError_) < 1);
+	m_PreviousGyroError = error;
 
+	return (fabs(error) < 1 && (400 * fabs(dError)) < 0.5);
 }
 
 void Drive::ResetDistance() {
