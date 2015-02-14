@@ -12,6 +12,8 @@ Intake::Intake(VictorSP* leftIntakeMotor, VictorSP* rightIntakeMotor, DoubleSole
 	LeftIntakeArm_ = leftIntakeArm;
 	RightIntakeArm_ = rightIntakeArm;
 	Compressor_ = compressor;
+	m_LoopControl = true;
+	Compressor_->SetClosedLoopControl(m_LoopControl);
 
 }
 
@@ -47,4 +49,17 @@ void Intake::SetIntakeArm(bool left, bool right, bool off) {
 	else
 		RightIntakeArm_->Set(RightIntakeArm_->kReverse);
 	return;
+}
+
+void Intake::SetLoopControl(bool value) {
+	m_LoopControl = value;
+	Compressor_->SetClosedLoopControl(m_LoopControl);
+}
+
+bool Intake::GetLoopControl() {
+	return m_LoopControl;
+}
+
+bool Intake::GetCompressorStatus() {
+	return Compressor_->GetPressureSwitchValue();
 }

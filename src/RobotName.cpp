@@ -17,19 +17,14 @@ RobotName::RobotName()
 	//Pneumatics
 	LeftIntakeArm_ = new DoubleSolenoid((int)Constants_->SOLENOID_LEFT_ARM_FWD,(int)Constants_->SOLENOID_LEFT_ARM_REV);
 	RightIntakeArm_ = new DoubleSolenoid((int)Constants_->SOLENOID_RIGHT_ARM_FWD,(int)Constants_->SOLENOID_RIGHT_ARM_REV);
-	Compressor_ = new Compressor((int)Constants_->COMPRESSOR_CAN_PORT);
-	Compressor_->Start(); //This will keep the compressor fully charged at all points in time.
+	Compressor_ = new Compressor(); //(int)Constants_->COMPRESSOR_CAN_PORT
 
 	//Sensors
 	DriveGyro_ = new RelativeGyro((int)Constants_->GYRO_DRIVE);
-	DriveGyro_->SetSensitivity(.0125);  //Sets sensitivity to andymark gyro.  http://files.andymark.com/DualUseGyroandAccelerometerSensorBoardam-2067.pdf
-	//	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_LEFT_DRIVE_A, (int)Constants_->ENCODER_LEFT_DRIVE_B);
-	LeftDriveEncoder_ = new Encoder(0, 1, false, Encoder::k4X);
-	RightDriveEncoder_ = new Encoder(2, 3, false, Encoder::k4X);
-
-//	RightDriveEncoder_ = new Encoder((int)Constants_->ENCODER_RIGHT_DRIVE_A, (int)Constants_->ENCODER_RIGHT_DRIVE_B);
-	LeftDriveEncoder_->SetDistancePerPulse(1.0);
-	RightDriveEncoder_->SetDistancePerPulse(-1.0); ///128 *6.0 *3.14159265
+	LeftDriveEncoder_ = new Encoder((int)Constants_->ENCODER_LEFT_DRIVE_A, (int)Constants_->ENCODER_LEFT_DRIVE_B);
+	RightDriveEncoder_ = new Encoder((int)Constants_->ENCODER_RIGHT_DRIVE_A, (int)Constants_->ENCODER_RIGHT_DRIVE_B);
+	//LeftDriveEncoder_ = new Encoder(0, 1, false, Encoder::k4X);
+	//RightDriveEncoder_ = new Encoder(2, 3, false, Encoder::k4X);
 
 	//Joysticks
 	DriverJoystick_ = new Joystick((int)Constants_->JOY_PORT_DRIVE);
@@ -70,6 +65,7 @@ void RobotName::TeleopInit()
 {
 	Drive_->ResetGyro();
 	Drive_->ResetEncoders();
+	Compressor_->Start(); //This will keep the compressor fully charged at all points in time.
 }
 
 void RobotName::DisabledContinuous()

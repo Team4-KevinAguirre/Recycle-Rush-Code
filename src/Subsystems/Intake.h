@@ -46,6 +46,24 @@ public:
 	 */
 	void SetIntakeArm(bool left, bool right, bool off);
 
+	/**
+	 * @Value
+	 * 	True: closed loop control on.  Compressor turns on when needed.
+	 * 	False: closed loop control off.  Compressor not allowed to turn on
+	 * http://bit.ly/2015_Compressor
+	 */
+	void SetLoopControl(bool value);
+
+	/**
+	 * Gets Closed Loop control status of the compressor.
+	 */
+	bool GetLoopControl();
+
+	/**
+	 * Returns whether the compressor is fully charged/Ready to fire solenoids.
+	 */
+	bool GetCompressorStatus();
+
 private:
 
 	Constants* Constants_;
@@ -56,6 +74,8 @@ private:
 	DoubleSolenoid* LeftIntakeArm_;
 	DoubleSolenoid* RightIntakeArm_;
 	Compressor* Compressor_;
+
+	bool m_LoopControl;
 
 };
 

@@ -19,10 +19,14 @@ Drive::Drive(VictorSP* leftDriveMotorA, VictorSP* leftDriveMotorB, VictorSP* rig
 	LeftDriveEncoder_ = leftDriveEncoder;
 	RightDriveEncoder_ = rightDriveEncoder;
 
+	DriveGyro_->SetSensitivity(.0125);  //Sets sensitivity to andymark gyro.  http://files.andymark.com/DualUseGyroandAccelerometerSensorBoardam-2067.pdf
+	LeftDriveEncoder_->SetDistancePerPulse(1.0);
+	RightDriveEncoder_->SetDistancePerPulse(-1.0); // 1.0/128 *6.0 *3.14159265
 
 	DrivePid_ = new Pid(&Constants_->PID_DRIVE_SPEED_KP, &Constants_->PID_DRIVE_SPEED_KI, &Constants_->PID_DRIVE_SPEED_KD);
 	TurnPid_ = new Pid(&Constants_->PID_DRIVE_TURN_KP,&Constants_->PID_DRIVE_TURN_KI, &Constants_->PID_DRIVE_TURN_KD);
 
+	//Member Variables
 	m_PreviousGyroError = 0;
 	m_PreviousDriveError = 0;
 	m_PrevDistance = 0;
